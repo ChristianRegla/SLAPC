@@ -11,4 +11,11 @@
     <string name="menu_gallery">Registro</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="iniciar_sesion">Iniciar Sesión</string>
+
+    <string-array name="categories">
+        <item>Categoría del armado</item>  <!-- Esta es la opción predeterminada no seleccionable, no cambiar sin tomar eso en cuenta jdfns -->
+        <item>Gaming</item>
+        <item>Oficina</item>
+        <item>Doméstico</item>
+    </string-array>
 </resources>
