@@ -1,4 +1,4 @@
-package com.example.slapc.ui.home
+package com.example.slapc.ui.login
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.slapc.R
 
-class HomeFragment : Fragment() {
+class LoginFragment : Fragment() {
 
     private lateinit var usernameEditText: EditText
     private lateinit var passwordEditText: EditText
@@ -65,6 +65,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun validateLogin(username: String, password: String): Boolean {
-        return users[username] == password
+        val users = sharedPreferences.getStringSet("users", mutableSetOf()) ?: mutableSetOf()
+        return users.any { it.split(":")[0] == username && it.split(":")[2] == password }
     }
+
 }
