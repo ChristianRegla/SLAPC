@@ -1,4 +1,4 @@
-package com.example.slapc.ui.gallery
+package com.example.slapc.ui.register
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -9,6 +9,6 @@
 
     <string name="menu_home">Inicio de sesión</string>
     <string name="menu_gallery">Registro</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_admin">Menú del administrador</string>
     <string name="iniciar_sesion">Iniciar Sesión</string>
 </resources>
