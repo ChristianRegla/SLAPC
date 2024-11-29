@@ -23,7 +23,8 @@ class LoginFragment : Fragment() {
     private lateinit var loginButton: Button
     private lateinit var registerTextView: TextView
 
-    private val users = mapOf(
+
+    private val defaultUsers = mapOf(
         "admin" to "admin123",
         "user1" to "userpass",
         "user2" to "password2"
@@ -46,17 +47,18 @@ class LoginFragment : Fragment() {
         loginButton = view.findViewById(R.id.loginButton)
         registerTextView = view.findViewById(R.id.registerTextView)
 
+        initializeDefaultUsers()
+
         loginButton.setOnClickListener {
             val username = usernameEditText.text.toString()
             val password = passwordEditText.text.toString()
 
             if (validateLogin(username, password)) {
                 if (username == "admin") {
-                    // Si es admin pues se va directo al menú de los admin
+
                     findNavController().navigate(R.id.nav_admin_menu)
                 } else {
-                    // Si no es admin y las credenciales son correctas pues se intuye que es usuario
-                    // y se dirije a la pantalla de los usuarios
+
                     findNavController().navigate(R.id.nav_gallery)
                 }
             } else {
@@ -69,9 +71,24 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun validateLogin(username: String, password: String): Boolean {
+    private fun initializeDefaultUsers() {
         val users = sharedPreferences.getStringSet("users", mutableSetOf()) ?: mutableSetOf()
-        return users.any { it.split(":")[0] == username && it.split(":")[2] == password }
+
+
+        for ((username, password) in defaultUsers) {
+            val userCredentials = "$username:$password"
+            if (!users.contains(userCredentials)) {
+                users.add(userCredentials)
+            }
+        }
+
+        sharedPreferences.edit().putStringSet("users", users).apply()
     }
 
+    private fun validateLogin(username: String, password: String): Boolean {
+        val users = sharedPreferences.getStringSet("users", mutableSetOf()) ?: mutableSetOf()
+
+
+        return users.any { it.split(":")[0] == username && it.split(":")[1] == password }
+    }
 }
