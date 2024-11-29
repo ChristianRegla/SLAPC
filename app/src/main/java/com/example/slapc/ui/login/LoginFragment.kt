@@ -1,5 +1,7 @@
 package com.example.slapc.ui.login
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +15,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.slapc.R
 
 class LoginFragment : Fragment() {
+
+    private lateinit var sharedPreferences: SharedPreferences
 
     private lateinit var usernameEditText: EditText
     private lateinit var passwordEditText: EditText
@@ -34,6 +38,8 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        sharedPreferences = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
 
         usernameEditText = view.findViewById(R.id.usernameEditText)
         passwordEditText = view.findViewById(R.id.passwordEditText)
@@ -58,7 +64,6 @@ class LoginFragment : Fragment() {
             }
         }
 
-        // Navegar al fragmento de registro (GalleryFragment)
         registerTextView.setOnClickListener {
             findNavController().navigate(R.id.nav_gallery)
         }
