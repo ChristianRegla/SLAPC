@@ -1,5 +1,5 @@
 package com.example.slapc
 
 enum class CategoriaComponente {
-    CPU, RAM, DISCO, MONITOR, TECLADO, MOUSE
+    CPU, DISCO_DURO, MONITOR, MOUSE, TECLADO, RAM
 }
