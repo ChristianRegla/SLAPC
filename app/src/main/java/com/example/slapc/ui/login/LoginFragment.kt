@@ -59,7 +59,7 @@ class LoginFragment : Fragment() {
                     findNavController().navigate(R.id.nav_admin_menu)
                 } else {
 
-                    findNavController().navigate(R.id.nav_gallery)
+                    findNavController().navigate(R.id.nav_catalogo)
                 }
             } else {
                 Toast.makeText(requireContext(), "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
