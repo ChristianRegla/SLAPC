@@ -12,6 +12,7 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="iniciar_sesion">Iniciar Sesión</string>
 
+    <string name="default_category_label">Categoría del armado</string>
     <string-array name="categories">
         <item>Categoría del armado</item>  <!-- Esta es la opción predeterminada no seleccionable, no cambiar sin tomar eso en cuenta jdfns -->
         <item>Gaming</item>

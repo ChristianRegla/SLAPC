@@ -8,6 +8,43 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.SLAPC"
+        tools:targetApi="31">
+
+        <!-- ArmadosActivity como Activity principal temporal -->
+        <activity
+            android:name=".ArmadosActivity"
+            android:exported="true"
+            android:label="Creando Armado"
+            android:theme="@style/Theme.SLAPC.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- MainActivity definida pero no como principal, RECUERDA REGRESARLO A COMO ESTABA -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.SLAPC.NoActionBar" />
+
+    </application>
+
+</manifest>
+
+<!--EN TEORÍA ESTE ES EL ORIGINAL: <?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
 
         android:supportsRtl="true"
         android:theme="@style/Theme.SLAPC"
@@ -26,4 +63,4 @@
         </activity>
     </application>
 
-</manifest>
+</manifest> -->
