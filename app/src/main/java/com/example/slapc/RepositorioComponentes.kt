@@ -11,6 +11,10 @@ object RepositorioComponentes {
         return catalogoComponentes.find { c -> c.id == id }
     }
 
+    fun buscarComponente(nombre: String): Componente? {
+        return catalogoComponentes.find { c -> c.nombre == nombre }
+    }
+
     fun actualizarComponente(id: Int, comp: Componente) {
         val match = catalogoComponentes.find { c -> c.id == id }
 

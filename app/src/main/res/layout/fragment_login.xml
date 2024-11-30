@@ -11,6 +11,20 @@
         android:background="@color/background_dark"
         android:alpha="0.7"/>
 
+    <TextView
+        android:id="@+id/text_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -47,6 +61,7 @@
         android:layout_alignParentBottom="true"
         app:cardCornerRadius="28dp"
         android:layout_marginBottom="-20dp"
+        app:cardBackgroundColor="@color/background_light"
         android:id="@+id/cardView">
 
         <LinearLayout
@@ -66,9 +81,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Inicia sesion con tu información"
+                android:text="Inicia sesión con tu información"
+                android:textColor="@color/gray"
                 android:alpha="0.7"/>
-            
+
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"/>
@@ -77,14 +93,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Usuario"
+                android:textColor="@color/gray"
                 android:alpha="0.7"
                 android:textStyle="bold"/>
 
             <EditText
+                android:id="@+id/usernameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:drawableEnd="@drawable/done_icon"/>
+                android:drawableEnd="@drawable/done_icon"
+                android:textColor="@color/text_primary"/>
 
             <View
                 android:layout_width="wrap_content"
@@ -94,13 +113,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Contraseña"
+                android:textColor="@color/gray"
                 android:alpha="0.7"
                 android:textStyle="bold"/>
 
             <EditText
+                android:id="@+id/passwordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
+                android:textColor="@color/text_primary"
                 android:drawableEnd="@drawable/password_icon"/>
 
             <RelativeLayout
@@ -108,9 +130,11 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/registerTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="¡Soy nuevo en SLAPC! Quiero registrarme"
+                    android:textColor="@color/gray"
                     android:layout_centerVertical="true"
                     android:alpha="0.7"/>
             </RelativeLayout>
@@ -118,12 +142,15 @@
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="10dp"/>
-            
+
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/loginButton"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:text="Iniciar Sesión"
-                app:cornerRadius="32dp"/>
+                app:cornerRadius="32dp"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/text_secondary"/>
 
             <View
                 android:layout_width="wrap_content"
@@ -133,6 +160,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Recuerda seguirnos en:"
+                android:textColor="@color/gray"
                 android:layout_gravity="center"
                 android:alpha="0.7"/>
 
@@ -141,7 +169,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center">
-                
+
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
