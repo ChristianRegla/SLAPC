@@ -50,7 +50,7 @@ class CatalogoFragment : Fragment() {
 
         //Spinner para categorías
         spinner = binding.spinnerCategorias
-        val categorias = listOf("Categoria", "Ram", "Gabinetes", "Monitores")
+        val categorias = listOf("Categoria", "Gaming", "Oficina", "Domestico")
         val adapterSpinner = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categorias)
         adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapterSpinner
@@ -69,9 +69,9 @@ class CatalogoFragment : Fragment() {
     private fun obtenerProductos(): List<Producto> {
         // Lista
         return listOf(
-            Producto(1, "Ram DD4",R.drawable.ram,90.7, "Ram","Increible y veloz Ram"),
-            Producto(2, "Monitor LG",R.drawable.monitor,90.7, "Monitores","Último modelo de LG"),
-            Producto(3, "Gabinete Gamer",R.drawable.gabinete,90.7, "Gabinetes","Último modelo de Gabinetes")
+            Producto(1, "Ram DD4",R.drawable.ram,90.7, "Domestico","Increible y veloz Ram"),
+            Producto(2, "Monitor LG",R.drawable.monitor,90.7, "Oficina","Último modelo de LG"),
+            Producto(3, "Gabinete Gamer",R.drawable.gabinete,90.7, "Gaming","Último modelo de Gabinetes")
         )
     }
 
