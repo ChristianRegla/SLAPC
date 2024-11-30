@@ -15,10 +15,6 @@
             android:name=".CRUDComponentesActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.detalles.ProductoDetailActivity"
-            android:exported="false"
-            android:theme="@style/Theme.SLAPC" />
-        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
