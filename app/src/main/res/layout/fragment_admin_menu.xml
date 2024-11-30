@@ -11,6 +11,29 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="28dp"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:src="@drawable/cropped_logo"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SLAPC"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="32sp"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
@@ -29,13 +52,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Menú del Administrador"
+                    android:text="@string/menu_admin"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:layout_gravity="center"/>
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/agregarComponenteButton"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:text="Agregar componente"
@@ -45,13 +69,15 @@
                     android:backgroundTint="@color/text_secondary"/>
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/editarComponenteButton"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:text="Editar componente"
                     app:cornerRadius="32dp"
                     android:textColor="@color/white"
                     android:drawableLeft="@drawable/ic_edit_component"
-                    app:backgroundTint="@color/text_secondary"/>
+                    app:backgroundTint="@color/text_secondary"
+                    android:layout_below="@id/agregarComponenteButton"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:layout_width="match_parent"
