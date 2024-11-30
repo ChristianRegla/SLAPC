@@ -40,6 +40,8 @@
         android:layout_marginTop="18dp"
         android:padding="8dp"
         android:textAlignment="textEnd"
+        android:clickable="true"
+        android:focusable="true"
         tools:listitem="@layout/item_producto" />
 
 </RelativeLayout>
