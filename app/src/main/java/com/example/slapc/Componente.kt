@@ -26,11 +26,15 @@ class Componente (
         fun obtenerCategoriaConNombre(categoria: String): CategoriaComponente? {
             return when (categoria) {
                 "CPU" -> CategoriaComponente.CPU;
-                "Disco duro" -> CategoriaComponente.DISCO_DURO;
+                "Almacenamiento" -> CategoriaComponente.ALMACENAMIENTO;
                 "Monitor" -> CategoriaComponente.MONITOR;
                 "Mouse" -> CategoriaComponente.MOUSE;
                 "Teclado" -> CategoriaComponente.TECLADO;
                 "RAM" -> CategoriaComponente.RAM;
+                "Fuente de Poder" -> CategoriaComponente.FUENTE_DE_PODER;
+                "Gabinete" -> CategoriaComponente.GABINETE;
+                "Tarjeta Gráfica" -> CategoriaComponente.GPU;
+                "Placa Madre" -> CategoriaComponente.MOTHERBOARD;
                 else -> null
             }
         }
@@ -38,11 +42,15 @@ class Componente (
         fun obtenerNombreDeCategoria(categoria: CategoriaComponente): String {
             return when (categoria) {
                 CategoriaComponente.CPU -> "CPU";
-                CategoriaComponente.DISCO_DURO -> "Disco duro";
+                CategoriaComponente.ALMACENAMIENTO -> "Almacenamiento";
                 CategoriaComponente.MONITOR -> "Monitor";
                 CategoriaComponente.MOUSE -> "Mouse";
                 CategoriaComponente.TECLADO -> "Teclado";
                 CategoriaComponente.RAM -> "RAM"
+                CategoriaComponente.FUENTE_DE_PODER -> "Fuente de Poder";
+                CategoriaComponente.GABINETE -> "Gabinete";
+                CategoriaComponente.GPU -> "Tarjeta Gráfica";
+                CategoriaComponente.MOTHERBOARD -> "Placa Madre";
             }
         }
     }

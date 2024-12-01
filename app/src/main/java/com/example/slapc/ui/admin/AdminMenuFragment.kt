@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.slapc.ArmadosActivity
 import com.example.slapc.CRUDComponentesActivity
 import com.example.slapc.R
 import com.google.android.material.button.MaterialButton
@@ -24,6 +25,12 @@ class AdminMenuFragment : Fragment() {
         val agregarComponenteButton = view.findViewById<MaterialButton>(R.id.agregarComponenteButton)
         agregarComponenteButton.setOnClickListener {
             val intent = Intent(requireContext(), CRUDComponentesActivity::class.java)
+            startActivity(intent)
+        }
+
+        val agregarArmadoButton = view.findViewById<MaterialButton>(R.id.agregarArmadoButton)
+        agregarArmadoButton.setOnClickListener {
+            val intent = Intent(requireContext(), ArmadosActivity::class.java)
             startActivity(intent)
         }
     }

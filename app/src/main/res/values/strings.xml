@@ -12,6 +12,14 @@
     <string name="menu_admin">Menú del administrador</string>
     <string name="iniciar_sesion">Iniciar Sesión</string>
 
+    <string name="default_category_label">Categoría del armado</string>
+    <string-array name="categories">
+        <item>Categoría del armado</item>  <!-- Esta es la opción predeterminada no seleccionable, no cambiar sin tomar eso en cuenta jdfns -->
+        <item>Gaming</item>
+        <item>Oficina</item>
+        <item>Doméstico</item>
+    </string-array>
+
     <string name="categoria">Categoría</string>
     <string name="detalles_tecnicos">Detalles técnicos</string>
     <string name="imagen">Imagen</string>
@@ -22,10 +30,14 @@
     
     <string-array name="categorias_componentes">
         <item>CPU</item>
-        <item>Disco duro</item>
+        <item>Almacenamiento</item>
         <item>Monitor</item>
         <item>Mouse</item>
         <item>Teclado</item>
         <item>RAM</item>
+        <item>Fuente de Poder</item>
+        <item>Gabinete</item>
+        <item>Tarjeta Gráfica</item>
+        <item>Placa Madre</item>
     </string-array>
 </resources>
