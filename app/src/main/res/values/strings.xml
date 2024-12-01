@@ -59,4 +59,7 @@
         <item>Tarjeta Gráfica</item>
         <item>Placa Madre</item>
     </string-array>
+
+
+    <string name="catalogo_prin">Catálogo de productos</string>
 </resources>
