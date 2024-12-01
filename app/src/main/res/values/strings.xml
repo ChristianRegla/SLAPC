@@ -11,6 +11,7 @@
     <string name="menu_gallery">Registro</string>
     <string name="menu_admin">Menú del administrador</string>
     <string name="iniciar_sesion">Iniciar Sesión</string>
+    <string name="agregar_armado">Agregar armado</string>
 
     <string name="default_category_label">Categoría del armado</string>
     <string-array name="categories">
@@ -27,6 +28,23 @@
     <string name="panel_componentes">Panel de componentes</string>
     <string name="precio">Precio</string>
     <string name="salir">Salir</string>
+
+    <string name="crear_armado">Creando un armado</string>"
+    <string name="nombre_armado">Nombre del armado</string>
+    <string name="descuento">Descuento (%)</string>
+    <string name="descripcion">Descripción</string>
+    <string name="placa_madre">Placa madre</string>
+    <string name="fuente_poder">Fuente de poder</string>
+    <string name="RAM">RAM</string>
+    <string name="almacenamiento">Almacenamiento</string>
+    <string name="procesador">Procesador</string>
+    <string name="gabinete">Gabinete</string>
+    <string name="tarjeta_grafica">Tarjeta gráfica (opcional)</string>
+
+    <string name="agregar">Agregar</string>
+    <string name="borrar">Borrar</string>
+    <string name="buscar">Buscar</string>
+
     
     <string-array name="categorias_componentes">
         <item>CPU</item>

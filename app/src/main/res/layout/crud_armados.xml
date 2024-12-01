@@ -2,21 +2,23 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#EEEEEE"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background="@drawable/background_register"
         tools:context=".ArmadosActivity">
 
-        <!-- Título -->
         <TextView
             android:id="@+id/headerTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Creando un armado"
+            android:text="@string/crear_armado"
             android:textSize="24sp"
             android:textStyle="bold"
             android:gravity="center"
@@ -27,262 +29,256 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <EditText
-            android:id="@+id/nameEditText"
-            android:layout_width="407dp"
-            android:layout_height="44dp"
-            android:hint="Nombre del armado"
-            android:inputType="text"
-            android:textColor="#000000"
-            android:textColorHint="#6F6F6F"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/headerTitle" />
-
-        <EditText
-            android:id="@+id/discountEditText"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="Descuento (%)"
-            android:inputType="number"
-            android:textColor="#000000"
-            android:textColorHint="#6F6F6F"
+            app:cardCornerRadius="16dp"
+            app:cardBackgroundColor="@color/background_dark"
+            app:layout_constraintTop_toBottomOf="@+id/headerTitle"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nameEditText" />
+            android:layout_marginTop="16dp">
 
-        <!-- Categoría (Spinner) -->
-        <Spinner
-            android:id="@+id/categorySpinner"
-            android:layout_width="404dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/discountEditText"
-            android:spinnerMode="dropdown"
-            android:entries="@array/categories"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-        <!-- Descripción (EditText) -->
-        <EditText
-            android:id="@+id/descriptionEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="Descripción"
-            android:textColor="#000000"
-            android:textColorHint="#6F6F6F"
-            android:inputType="textMultiLine"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/categorySpinner" />
+                <EditText
+                    android:id="@+id/nameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="@string/nombre_armado"
+                    android:inputType="text"
+                    android:layout_marginTop="8dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:background="#30FFFFFF"/>
 
-        <!-- Placa Madre -->
-        <TextView
-            android:id="@+id/labelMotherboard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Placa Madre"
-            android:textColor="#000000"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/descriptionEditText" />
+                <EditText
+                    android:id="@+id/discountEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:hint="@string/descuento"
+                    android:inputType="number"
+                    android:textColor="@color/white"
+                    android:background="#30FFFFFF"
+                    android:textColorHint="@color/white" />
 
-        <Spinner
-            android:id="@+id/spinnerMotherboard"
-            android:layout_width="411dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/labelMotherboard" />
+                <!-- Categoría (Spinner) -->
+                <Spinner
+                    android:id="@+id/categorySpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:background="#30FFFFFF"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"
+                    android:spinnerMode="dropdown"
+                    android:entries="@array/categories"/>
 
-        <!-- Fuente de Poder -->
-        <TextView
-            android:id="@+id/labelPowerSupply"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Fuente de Poder"
-            android:textColor="#000000"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/spinnerMotherboard" />
+                <!-- Descripción (EditText) -->
+                <EditText
+                    android:id="@+id/descriptionEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:hint="@string/descripcion"
+                    android:background="#30FFFFFF"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"
+                    android:inputType="textMultiLine"
+                    />
 
-        <Spinner
-            android:id="@+id/spinnerPowerSupply"
-            android:layout_width="0dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/labelPowerSupply" />
+                <!-- Placa Madre -->
+                <TextView
+                    android:id="@+id/labelMotherboard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/placa_madre"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/descriptionEditText" />
 
-        <!-- RAM -->
-        <TextView
-            android:id="@+id/labelRam"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="RAM"
-            android:textColor="#000000"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/spinnerPowerSupply" />
+                <Spinner
+                    android:id="@+id/spinnerMotherboard"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#30FFFFFF"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"/>
 
-        <Spinner
-            android:id="@+id/spinnerRam"
-            android:layout_width="0dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/labelRam" />
+                <!-- Fuente de Poder -->
+                <TextView
+                    android:id="@+id/labelPowerSupply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/fuente_poder"
+                    android:textColor="@color/white"/>
 
-        <!-- Almacenamiento -->
-        <TextView
-            android:id="@+id/labelStorage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Almacenamiento"
-            android:textColor="#000000"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/spinnerRam" />
+                <Spinner
+                    android:id="@+id/spinnerPowerSupply"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#30FFFFFF"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"/>
 
-        <Spinner
-            android:id="@+id/spinnerStorage"
-            android:layout_width="0dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/labelStorage" />
+                <!-- RAM -->
+                <TextView
+                    android:id="@+id/labelRam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/RAM"
+                    android:textColor="@color/white"/>
 
-        <!-- Procesador -->
-        <TextView
-            android:id="@+id/labelProcessor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Procesador"
-            android:textColor="#000000"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/spinnerStorage" />
+                <Spinner
+                    android:id="@+id/spinnerRam"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#30FFFFFF"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white" />
 
-        <Spinner
-            android:id="@+id/spinnerProcessor"
-            android:layout_width="0dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/labelProcessor" />
+                <!-- Almacenamiento -->
+                <TextView
+                    android:id="@+id/labelStorage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/almacenamiento"
+                    android:textColor="@color/white"/>
 
-        <!-- Gabinete -->
-        <TextView
-            android:id="@+id/labelCabinet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Gabinete"
-            android:textColor="#000000"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/spinnerProcessor" />
+                <Spinner
+                    android:id="@+id/spinnerStorage"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#30FFFFFF"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"/>
 
-        <Spinner
-            android:id="@+id/spinnerCabinet"
-            android:layout_width="0dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/labelCabinet" />
+                <!-- Procesador -->
+                <TextView
+                    android:id="@+id/labelProcessor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/procesador"
+                    android:textColor="@color/white"/>
 
-        <!-- Tarjeta Gráfica (Opcional) -->
-        <TextView
-            android:id="@+id/labelGraphicsCard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textColor="#000000"
-            android:text="Tarjeta Gráfica (Opcional)"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/spinnerCabinet" />
+                <Spinner
+                    android:id="@+id/spinnerProcessor"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#30FFFFFF"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white" />
 
-        <Spinner
-            android:id="@+id/spinnerGraphicsCard"
-            android:layout_width="0dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/labelGraphicsCard" />
+                <!-- Gabinete -->
+                <TextView
+                    android:id="@+id/labelCabinet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/gabinete"
+                    android:textColor="@color/white"/>
 
-        <!-- Botones (Agregar, Borrar y Salir) -->
+                <Spinner
+                    android:id="@+id/spinnerCabinet"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#30FFFFFF"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white" />
 
-        <!-- Botón para Borrar -->
+                <!-- Tarjeta Gráfica (Opcional) -->
+                <TextView
+                    android:id="@+id/labelGraphicsCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textColor="@color/white"
+                    android:text="@string/tarjeta_grafica"/>
 
-        <!-- Botón para Salir -->
+                <Spinner
+                    android:id="@+id/spinnerGraphicsCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#30FFFFFF"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"/>
 
-        <ImageButton
-            android:id="@+id/saveButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:contentDescription="Agregar armado"
-            android:src="@android:drawable/ic_menu_save"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.428"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            android:backgroundTint="#00ADB5" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"/>
 
-        <ImageButton
-            android:id="@+id/deleteButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:contentDescription="Borrar armado"
-            android:src="@android:drawable/ic_menu_delete"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.901"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            android:backgroundTint="#00ADB5" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal"
+                    android:gravity="center">
 
-        <ImageButton
-            android:id="@+id/searchButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:contentDescription="Borrar armado"
-            android:src="@android:drawable/ic_menu_search"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.664"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            android:backgroundTint="#00ADB5" />
+                    <ImageButton
+                        android:id="@+id/saveButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:contentDescription="@string/agregar"
+                        android:src="@android:drawable/ic_menu_save"
+                        android:backgroundTint="@color/text_secondary" />
 
-        <Button
-            android:id="@+id/exitButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:backgroundTint="#00ADB5"
-            android:text="Salir"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.055"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+                    <ImageButton
+                        android:id="@+id/deleteButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:contentDescription="@string/borrar"
+                        android:src="@android:drawable/ic_menu_delete"
+                        android:backgroundTint="@color/text_secondary" />
+
+                    <ImageButton
+                        android:id="@+id/searchButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:contentDescription="@string/buscar"
+                        android:src="@android:drawable/ic_menu_search"
+                        android:backgroundTint="@color/text_secondary" />
+
+                    <Button
+                        android:id="@+id/exitButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/text_secondary"
+                        android:text="@string/salir"
+                        android:textColor="@color/white"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>
