@@ -71,6 +71,12 @@ class LoginFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        limpiarCampos()
+    }
+
     private fun initializeDefaultUsers() {
         val users = sharedPreferences.getStringSet("users", mutableSetOf()) ?: mutableSetOf()
 
@@ -90,5 +96,10 @@ class LoginFragment : Fragment() {
 
 
         return users.any { it.split(":")[0] == username && it.split(":")[1] == password }
+    }
+
+    private fun limpiarCampos() {
+        usernameEditText.text.clear()
+        passwordEditText.text.clear()
     }
 }

@@ -12,6 +12,7 @@
     <string name="menu_admin">Menú del administrador</string>
     <string name="iniciar_sesion">Iniciar Sesión</string>
     <string name="agregar_armado">Agregar armado</string>
+    <string name="salir_admin">Salir de administrador</string>
 
     <string name="default_category_label">Categoría del armado</string>
     <string-array name="categories">
