@@ -18,6 +18,8 @@
         <item>Gaming</item>
         <item>Oficina</item>
         <item>Doméstico</item>
+    </string-array>
+
     <string name="categoria">Categoría</string>
     <string name="detalles_tecnicos">Detalles técnicos</string>
     <string name="imagen">Imagen</string>
@@ -28,10 +30,14 @@
     
     <string-array name="categorias_componentes">
         <item>CPU</item>
-        <item>Disco duro</item>
+        <item>Almacenamiento</item>
         <item>Monitor</item>
         <item>Mouse</item>
         <item>Teclado</item>
         <item>RAM</item>
+        <item>Fuente de Poder</item>
+        <item>Gabinete</item>
+        <item>Tarjeta Gráfica</item>
+        <item>Placa Madre</item>
     </string-array>
 </resources>

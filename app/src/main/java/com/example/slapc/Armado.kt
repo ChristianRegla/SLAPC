@@ -6,5 +6,6 @@ data class Armado(
     var descuento: Double,
     var categoria: String,
     var descripcion: String,
-    var componentes: List<Componente>
+    var componentes: List<Componente>,
+    var precio: Double
 )

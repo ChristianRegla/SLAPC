@@ -19,7 +19,7 @@ object RepositorioArmados {
         val index = catalogoArmados.indexOfFirst { it.id == id }
 
         return if (index != -1) {
-            catalogoArmados[index] = armado
+            catalogoArmados[index] = armado.copy()
             true
         } else {
             false
@@ -36,5 +36,12 @@ object RepositorioArmados {
 
     fun obtenerTodosArmados(): List<Armado> {
         return catalogoArmados
+    }
+
+    /**
+     * Calcula el precio total de todos los armados en el repositorio.
+     */
+    fun calcularPrecioTotalArmados(): Double {
+        return catalogoArmados.sumOf { it.precio }
     }
 }

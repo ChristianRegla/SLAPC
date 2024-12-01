@@ -69,10 +69,10 @@
                     android:backgroundTint="@color/text_secondary"/>
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/editarComponenteButton"
+                    android:id="@+id/agregarArmadoButton"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:text="Editar componente"
+                    android:text="Agregar Armado"
                     app:cornerRadius="32dp"
                     android:textColor="@color/white"
                     android:drawableLeft="@drawable/ic_edit_component"
