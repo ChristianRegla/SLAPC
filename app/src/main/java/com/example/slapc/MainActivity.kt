@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+        // menu should be considered as top level destinations
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_login, R.id.nav_gallery, R.id.nav_admin_menu
