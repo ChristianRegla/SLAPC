@@ -41,7 +41,6 @@ class Componente (
 
         fun obtenerNombreDeCategoria(categoria: CategoriaComponente): String {
             return when (categoria) {
-                CategoriaComponente.TODOS -> "Todos";
                 CategoriaComponente.CPU -> "CPU";
                 CategoriaComponente.ALMACENAMIENTO -> "Almacenamiento";
                 CategoriaComponente.MONITOR -> "Monitor";
