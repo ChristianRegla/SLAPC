@@ -143,6 +143,7 @@ class ArmadosActivity : AppCompatActivity() {
 
             // Limpiar el formulario después de guardar
             clearForm()
+            Toast.makeText(this, "Total Calculado: $finalPrice", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -169,24 +170,32 @@ class ArmadosActivity : AppCompatActivity() {
     }
 
     private fun searchArmado() {
-        // Buscar un armado por nombre o ID
-        val nameToSearch = nameEditText.text.toString()
-        val foundArmado = searchArmadoInDatabase(nameToSearch)
+        val nameToSearch = nameEditText.text.toString().trim()
 
-        if (foundArmado != null) {
-            // Rellenar el formulario con los datos del armado encontrado
-            nameEditText.setText(foundArmado.nombre)
-            discountEditText.setText(foundArmado.descuento.toString())
-            descriptionEditText.setText(foundArmado.descripcion)
+        if (nameToSearch.isEmpty()) {
+            Toast.makeText(this, "Por favor ingrese un nombre para buscar", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val foundArmados = searchArmadoInDatabase(nameToSearch)
+
+        if (foundArmados.isNotEmpty()) {
+            // Si encontramos armados, los mostramos en el primer resultado encontrado
+            val firstArmado = foundArmados.first()
+
+            // Rellenar el formulario con los datos del primer armado encontrado
+            nameEditText.setText(firstArmado.nombre)
+            discountEditText.setText(firstArmado.descuento.toString())
+            descriptionEditText.setText(firstArmado.descripcion)
 
             // Llenar los spinners con los componentes seleccionados
-            setSpinnerSelection(spinnerMotherboard, foundArmado.componentes)
-            setSpinnerSelection(spinnerPowerSupply, foundArmado.componentes)
-            setSpinnerSelection(spinnerRam, foundArmado.componentes)
-            setSpinnerSelection(spinnerStorage, foundArmado.componentes)
-            setSpinnerSelection(spinnerProcessor, foundArmado.componentes)
-            setSpinnerSelection(spinnerCabinet, foundArmado.componentes)
-            setSpinnerSelection(spinnerGraphicsCard, foundArmado.componentes)
+            setSpinnerSelection(spinnerMotherboard, firstArmado.componentes)
+            setSpinnerSelection(spinnerPowerSupply, firstArmado.componentes)
+            setSpinnerSelection(spinnerRam, firstArmado.componentes)
+            setSpinnerSelection(spinnerStorage, firstArmado.componentes)
+            setSpinnerSelection(spinnerProcessor, firstArmado.componentes)
+            setSpinnerSelection(spinnerCabinet, firstArmado.componentes)
+            setSpinnerSelection(spinnerGraphicsCard, firstArmado.componentes)
 
             Toast.makeText(this, "Armado encontrado", Toast.LENGTH_SHORT).show()
         } else {
@@ -194,9 +203,10 @@ class ArmadosActivity : AppCompatActivity() {
         }
     }
 
-    private fun searchArmadoInDatabase(name: String): Armado? {
-        // Aquí deberías implementar la búsqueda en tu base de datos o lista
-        return null  // Por ahora, solo devuelve null
+
+    private fun searchArmadoInDatabase(name: String): List<Armado> {
+        // Usamos el repositorio para buscar los armados que contengan el nombre dado
+        return RepositorioArmados.buscarArmadosPorNombre(name)
     }
 
     private fun setSpinnerSelection(spinner: Spinner, componentes: List<Componente>) {
