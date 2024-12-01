@@ -10,11 +10,15 @@ import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.slapc.ui.ProductoViewModel
+import com.example.slapc.ui.catalogo.Producto
 
 class CRUDComponentesActivity : AppCompatActivity() {
+    private val viewModel: ProductoViewModel by viewModels()
     private lateinit var edtImagen: EditText
     private lateinit var edtNombre: EditText
     private lateinit var edtPrecio: EditText
@@ -80,39 +84,23 @@ class CRUDComponentesActivity : AppCompatActivity() {
     }
 
     private fun guardarComponente() {
-        // Validación de campos completos
-        if (
-            edtNombre.text.isEmpty() || edtNombre.text.isBlank()
-            || edtImagen.text.isEmpty() || edtImagen.text.isBlank()
-            || edtPrecio.text.isEmpty() || edtPrecio.text.isBlank()
-            || edtDetalles.text.isEmpty() || edtDetalles.text.isBlank()
-        ) {
-            // Si los datos son incompletos se muestra una advertencia.
+        if (edtNombre.text.isBlank() || edtImagen.text.isBlank() || edtPrecio.text.isBlank() || edtDetalles.text.isBlank()) {
             Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show()
+            return
         }
-        // Si los datos son completos se avanza al guardado.
-        else {
-            val nuevoComponente = Componente(
-                edtNombre.text.toString(),
-                edtImagen.text.toString(),
-                edtPrecio.text.toString().toDouble(),
-                Componente.obtenerCategoriaConNombre(categoriaSeleccionada)!!,
-                edtDetalles.text.toString()
-            )
-            val componenteCoincidiente = RepositorioComponentes.buscarComponente(edtNombre.text.toString())
 
-            // Si se encuentra un componente con el mismo nombre, se actualiza; sino, se crea.
-            if(componenteCoincidiente != null) {
-                RepositorioComponentes.actualizarComponente(componenteCoincidiente.id, nuevoComponente)
-                Toast.makeText(this, "Componente '${componenteCoincidiente.nombre}' actualizado", Toast.LENGTH_SHORT).show()
-            }
-            else {
-                RepositorioComponentes.agregarComponente(nuevoComponente)
-                Toast.makeText(this, "Componente '${nuevoComponente.nombre}' creado", Toast.LENGTH_SHORT).show()
-            }
-        }
+        val nuevoComponente = Producto(
+            id = viewModel.productos.value?.size?.plus(1) ?: 1,
+            nombre = edtNombre.text.toString(),
+            reflimagen = edtImagen, // Cambiar por lógica real de imágenes
+            precio = edtPrecio.text.toString().toDouble(),
+            categoria = categoriaSeleccionada,
+            detallesTecnicos = edtDetalles.text.toString()
+        )
+
+        viewModel.agregarProducto(nuevoComponente)
+        Toast.makeText(this, "Componente agregado correctamente", Toast.LENGTH_SHORT).show()
     }
-
     private fun buscarComponente() {
         // Si no hay un nombre ingresado para buscar se muestra una advertencia.
         if (edtNombre.text.isEmpty() || edtNombre.text.isBlank()) {
@@ -161,4 +149,5 @@ class CRUDComponentesActivity : AppCompatActivity() {
             }
         }
     }
+
 }
