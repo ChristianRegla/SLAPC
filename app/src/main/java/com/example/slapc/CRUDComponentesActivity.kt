@@ -1,6 +1,8 @@
+// CRUDComponentesActivity.kt
 package com.example.slapc
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -10,9 +12,12 @@ import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.slapc.Componente.Companion.toProducto
+import com.example.slapc.ui.catalogo.ProductoViewModel
 
 class CRUDComponentesActivity : AppCompatActivity() {
     private lateinit var edtImagen: EditText
@@ -26,8 +31,10 @@ class CRUDComponentesActivity : AppCompatActivity() {
     private lateinit var ibtnBorrar: ImageButton
 
     private lateinit var spinnerAdapter: ArrayAdapter<String>
-
     private var categoriaSeleccionada: String = "CPU"
+
+    // ViewModel para gestionar los productos
+    private val productoViewModel: ProductoViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +46,7 @@ class CRUDComponentesActivity : AppCompatActivity() {
             insets
         }
 
-        // Referencia de componentes gráficos
+        // Referencias de componentes gráficos
         edtImagen = findViewById(R.id.edtCompImagen)
         edtNombre = findViewById(R.id.edtCompNombre)
         edtPrecio = findViewById(R.id.edtCompPrecio)
@@ -51,7 +58,6 @@ class CRUDComponentesActivity : AppCompatActivity() {
         ibtnBorrar = findViewById(R.id.ibtnCompBorrar)
 
         // Configuración del spinner de categorías
-
         spinnerAdapter = ArrayAdapter(
             this,
             android.R.layout.simple_spinner_dropdown_item,
@@ -64,11 +70,11 @@ class CRUDComponentesActivity : AppCompatActivity() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
+                // No hacer nada
             }
         }
 
-        // Configuración de botones de acción.
+        // Configuración de botones de acción
         btnSalir.setOnClickListener { volverAPanelDeAdmins() }
         ibtnGuardar.setOnClickListener { guardarComponente() }
         ibtnBuscar.setOnClickListener { buscarComponente() }
@@ -87,11 +93,10 @@ class CRUDComponentesActivity : AppCompatActivity() {
             || edtPrecio.text.isEmpty() || edtPrecio.text.isBlank()
             || edtDetalles.text.isEmpty() || edtDetalles.text.isBlank()
         ) {
-            // Si los datos son incompletos se muestra una advertencia.
+            // Si los datos son incompletos, se muestra una advertencia.
             Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show()
-        }
-        // Si los datos son completos se avanza al guardado.
-        else {
+        } else {
+            // Creación del nuevo componente
             val nuevoComponente = Componente(
                 edtNombre.text.toString(),
                 edtImagen.text.toString(),
@@ -101,38 +106,35 @@ class CRUDComponentesActivity : AppCompatActivity() {
             )
             val componenteCoincidiente = RepositorioComponentes.buscarComponente(edtNombre.text.toString())
 
-            // Si se encuentra un componente con el mismo nombre, se actualiza; sino, se crea.
-            if(componenteCoincidiente != null) {
+            if (componenteCoincidiente != null) {
+                // Actualización del componente
                 RepositorioComponentes.actualizarComponente(componenteCoincidiente.id, nuevoComponente)
                 Toast.makeText(this, "Componente '${componenteCoincidiente.nombre}' actualizado", Toast.LENGTH_SHORT).show()
-            }
-            else {
+            } else {
+                // Creación del nuevo componente
                 RepositorioComponentes.agregarComponente(nuevoComponente)
                 Toast.makeText(this, "Componente '${nuevoComponente.nombre}' creado", Toast.LENGTH_SHORT).show()
             }
+
+            // Notificar al ViewModel que se ha agregado o actualizado un componente
+            productoViewModel.agregarProductoDesdeComponente(nuevoComponente.toProducto())
+            Log.d("CatalogoFragment", "Producto agregado: ${nuevoComponente.toProducto()}")
         }
     }
 
     private fun buscarComponente() {
-        // Si no hay un nombre ingresado para buscar se muestra una advertencia.
         if (edtNombre.text.isEmpty() || edtNombre.text.isBlank()) {
             Toast.makeText(this, "Ingrese un nombre de componente para buscar", Toast.LENGTH_SHORT).show()
-        }
-        // Si hay un nombre, se avanza a la búsqueda.
-        else {
+        } else {
             val componenteEncontrado = RepositorioComponentes.buscarComponente(edtNombre.text.toString())
 
-            // Si no se encuentra coincidencia de nombre se indica.
-            if(componenteEncontrado == null) {
+            if (componenteEncontrado == null) {
                 Toast.makeText(this, "No se encontró el componente '${edtNombre.text}'", Toast.LENGTH_SHORT).show()
-            }
-            // Si se encuentra una coincidencia se muestran los campos.
-            else {
+            } else {
                 edtImagen.setText(componenteEncontrado.refImagen)
                 edtPrecio.setText("${componenteEncontrado.precio}")
                 edtDetalles.setText(componenteEncontrado.detallesTecnicos)
 
-                // El spinner se ajusta recuperando la posición de la categoria desde el adaptador.
                 val posicionSeleccionada =
                     spinnerAdapter.getPosition(Componente.obtenerNombreDeCategoria(componenteEncontrado.categoria))
                 spnCategoria.setSelection(posicionSeleccionada)
@@ -143,21 +145,21 @@ class CRUDComponentesActivity : AppCompatActivity() {
     }
 
     private fun borrarComponente() {
-        // Si no hay un nombre escrito se muestra una advertencia.
         if (edtNombre.text.isEmpty() || edtNombre.text.isBlank()) {
             Toast.makeText(this, "Ingrese un nombre de componente para borrar", Toast.LENGTH_SHORT).show()
-        }
-        // Si hay un nombre escrito se procede a averiguar si el componente existe.
-        else {
+        } else {
             val componenteEncontrado = RepositorioComponentes.buscarComponente(edtNombre.text.toString())
 
-            // Si el componente no existe se informa, en caso contrario se borra
-            if(componenteEncontrado == null) {
+            if (componenteEncontrado == null) {
                 Toast.makeText(this, "No se encontró el componente '${edtNombre.text}' a borrar", Toast.LENGTH_SHORT).show()
-            }
-            else {
+            } else {
                 RepositorioComponentes.quitarComponente(componenteEncontrado.id)
                 Toast.makeText(this, "Componente '${componenteEncontrado.nombre}' borrado", Toast.LENGTH_SHORT).show()
+
+                // Notificar al ViewModel que se ha eliminado un componente
+                val listaActual = productoViewModel.productos.value?.toMutableList()
+                listaActual?.removeIf { it.nombre == componenteEncontrado.nombre }
+                productoViewModel.setProductos(listaActual ?: emptyList())
             }
         }
     }

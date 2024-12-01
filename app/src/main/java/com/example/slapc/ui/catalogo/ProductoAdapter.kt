@@ -30,25 +30,31 @@ class ProductoAdapter(private val productos: List<Producto>) : RecyclerView.Adap
     override fun onBindViewHolder(holder: ProductoViewHolder, position: Int) {
         val producto = productos[position]
 
-        if (producto.reflimagen is Int) {
-            holder.imgProducto.setImageResource(producto.reflimagen)
+        // Si `reflimagen` es una URL (String), se carga la imagen de forma asincrónica.
+        if (producto.refImagen.isNotEmpty()) {
+            LoadImageTask(holder.imgProducto).execute(producto.refImagen)
+        } else {
+            // Si `reflimagen` está vacía o no es válida, se usa una imagen predeterminada.
+            holder.imgProducto.setImageResource(R.drawable.ic_address)
         }
+
         holder.tvNombre.text = producto.nombre
         holder.tvDescription.text = producto.detallesTecnicos
 
-        // Click
+        // Configuración del click listener
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, ProductoDetailActivity::class.java)
             intent.putExtra("id", producto.id)
             intent.putExtra("nombre", producto.nombre)
-            intent.putExtra("reflimagen", producto.reflimagen.toString())
+            intent.putExtra("reflimagen", producto.refImagen)
             intent.putExtra("precio", producto.precio)
             intent.putExtra("categoria", producto.categoria)
             intent.putExtra("detallesTecnicos", producto.detallesTecnicos)
             context.startActivity(intent)
         }
     }
+
 
     private class LoadImageTask(val imageView: ImageView) : AsyncTask<String, Void, Bitmap?>() {
         override fun doInBackground(vararg params: String?): Bitmap? {
