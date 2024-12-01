@@ -27,7 +27,7 @@ class CRUDComponentesActivity : AppCompatActivity() {
 
     private lateinit var spinnerAdapter: ArrayAdapter<String>
 
-    private var categoriaSeleccionada: String = "CPU"
+    private var categoriaSeleccionada: String = "Todos"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -128,7 +128,7 @@ class CRUDComponentesActivity : AppCompatActivity() {
             }
             // Si se encuentra una coincidencia se muestran los campos.
             else {
-                edtImagen.setText(componenteEncontrado.refImagen)
+                edtImagen.setText(componenteEncontrado.refImagen as String)
                 edtPrecio.setText("${componenteEncontrado.precio}")
                 edtDetalles.setText(componenteEncontrado.detallesTecnicos)
 

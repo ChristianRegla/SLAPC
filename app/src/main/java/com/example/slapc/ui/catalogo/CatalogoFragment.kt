@@ -13,10 +13,12 @@ import com.example.slapc.R
 import com.example.slapc.databinding.FragmentCatalogoBinding
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.slapc.CategoriaComponente
+import com.example.slapc.Componente
 
 class CatalogoFragment : Fragment() {
 
-    private lateinit var productos: List<Producto>
+    private lateinit var productos: List<Componente>
     private lateinit var adapter: ProductoAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchView: SearchView
@@ -50,13 +52,13 @@ class CatalogoFragment : Fragment() {
 
         //Spinner para categorías
         spinner = binding.spinnerCategorias
-        val categorias = listOf("Categoria", "Gaming", "Oficina", "Domestico")
+        val categorias = resources.getStringArray(R.array.categorias_componentes)
         val adapterSpinner = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categorias)
         adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapterSpinner
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parentView: AdapterView<*>, view: View?, position: Int, id: Long) {
-                val categoriaSeleccionada = categorias[position]
+                val categoriaSeleccionada = categorias[position].toString()
                 filtrarPorCategoria(categoriaSeleccionada)
             }
 
@@ -66,13 +68,13 @@ class CatalogoFragment : Fragment() {
         return binding.root
     }
 
-    private fun obtenerProductos(): List<Producto> {
+    private fun obtenerProductos(): List<Componente> {
         // Lista
         return listOf(
-            Producto(1, "Ram DD4",R.drawable.ram,90.7, "Domestico","Increible y veloz Ram"),
-            Producto(2, "Monitor LG",R.drawable.monitor,90.7, "Oficina","Último modelo de LG"),
-            Producto(3, "Gabinete Gamer",R.drawable.gabinete,90.7, "Gaming","Último modelo de Gabinetes")
-        )
+            Componente("Ram DD4","R.drawable.ram,90.7, "RAM","Increible y veloz Ram"),
+            Componente(2, "Monitor LG",R.drawable.monitor,90.7, "Monitor","Último modelo de LG"),
+            Componente(3, "Gabinete Gamer",R.drawable.gabinete,90.7, "Gabinete","Último modelo de Gabinetes")
+        ) as List<Componente>
     }
 
     private fun filtrarProductos(query: String?) {
@@ -82,12 +84,20 @@ class CatalogoFragment : Fragment() {
     }
 
     private fun filtrarPorCategoria(categoria: String) {
-        val filteredList = if (categoria == "Categoria") {
+        val categoriaEnum = stringToCategoria(categoria)
+
+        val filteredList = if (categoria == "Todos" || categoriaEnum == null) {
             productos
         } else {
-            productos.filter { it.categoria == categoria }
+            productos.filter { it.categoria == categoriaEnum }
         }
+
         adapter = ProductoAdapter(filteredList)
         recyclerView.adapter = adapter
     }
+    private fun stringToCategoria(categoria: String): CategoriaComponente? {
+        return CategoriaComponente.values().firstOrNull { it.name.equals(categoria, ignoreCase = true) }
+    }
+
+
 }
