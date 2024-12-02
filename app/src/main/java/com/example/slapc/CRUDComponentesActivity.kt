@@ -16,8 +16,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.slapc.Componente.Companion.toProducto
-import com.example.slapc.ui.catalogo.ProductoViewModel
 
 class CRUDComponentesActivity : AppCompatActivity() {
     private lateinit var edtImagen: EditText
@@ -32,9 +30,6 @@ class CRUDComponentesActivity : AppCompatActivity() {
 
     private lateinit var spinnerAdapter: ArrayAdapter<String>
     private var categoriaSeleccionada: String = "CPU"
-
-    // ViewModel para gestionar los productos
-    private val productoViewModel: ProductoViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -116,9 +111,7 @@ class CRUDComponentesActivity : AppCompatActivity() {
                 Toast.makeText(this, "Componente '${nuevoComponente.nombre}' creado", Toast.LENGTH_SHORT).show()
             }
 
-            // Notificar al ViewModel que se ha agregado o actualizado un componente
-            productoViewModel.agregarProductoDesdeComponente(nuevoComponente.toProducto())
-            Log.d("CatalogoFragment", "Producto agregado: ${nuevoComponente.toProducto()}")
+            Log.d("CatalogoFragment", "Producto agregado: $nuevoComponente")
         }
     }
 
@@ -155,11 +148,6 @@ class CRUDComponentesActivity : AppCompatActivity() {
             } else {
                 RepositorioComponentes.quitarComponente(componenteEncontrado.id)
                 Toast.makeText(this, "Componente '${componenteEncontrado.nombre}' borrado", Toast.LENGTH_SHORT).show()
-
-                // Notificar al ViewModel que se ha eliminado un componente
-                val listaActual = productoViewModel.productos.value?.toMutableList()
-                listaActual?.removeIf { it.nombre == componenteEncontrado.nombre }
-                productoViewModel.setProductos(listaActual ?: emptyList())
             }
         }
     }

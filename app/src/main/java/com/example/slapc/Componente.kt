@@ -1,7 +1,5 @@
 package com.example.slapc
 
-import com.example.slapc.ui.catalogo.Producto
-
 class Componente(
     var nombre: String,
     var refImagen: String,
@@ -50,18 +48,6 @@ class Componente(
                 CategoriaComponente.MOTHERBOARD -> "Placa Madre"
             }
         }
-        // Extensión en Componente para convertir a Producto
-        fun Componente.toProducto(): Producto {
-            return Producto(
-                id = this.id.toString(),
-                nombre = this.nombre,
-                refImagen = this.refImagen,
-                precio = this.precio,
-                categoria = this.categoria,
-                detallesTecnicos = this.detallesTecnicos
-            )
-        }
-
     }
 }
 
