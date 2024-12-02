@@ -3,7 +3,7 @@ package com.example.slapc.ui.carrito.adaptador
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.slapc.ItemEnCarrito
+import com.example.slapc.ui.carrito.ItemEnCarrito
 import com.example.slapc.R
 
 class ItemEnCarritoAdaptador(private val listaItems: List<ItemEnCarrito>) :

@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.ToggleButton
 import androidx.recyclerview.widget.RecyclerView
-import com.example.slapc.ItemEnCarrito
+import com.example.slapc.ui.carrito.ItemEnCarrito
 import com.example.slapc.R
 
 class ItemEnCarritoVista(val view: View) : RecyclerView.ViewHolder(view) {

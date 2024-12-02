@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.slapc.ItemEnCarrito
+import com.example.slapc.CategoriaComponente
+import com.example.slapc.Componente
+import com.example.slapc.RepositorioComponentes
 import com.example.slapc.databinding.FragmentCarritoBinding
 import com.example.slapc.ui.carrito.adaptador.ItemEnCarritoAdaptador
 
@@ -28,9 +28,17 @@ class CarritoFragment : Fragment() {
         _binding = FragmentCarritoBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val itemsCarrito = listOf(
-            ItemEnCarrito(0, "Componente", 3, 300.0, false),
-            ItemEnCarrito(0, "Componente", 3, 300.0, false)
+        RepositorioComponentes.agregarComponente(Componente(
+            "supermouse",
+            "mouse.jpg",
+            99.99,
+            CategoriaComponente.MOUSE,
+            "Es un gran mouse"
+        ))
+
+        val itemsCarrito = listOf<ItemEnCarrito>(
+            ComponenteEnCarrito(0, 5),
+            ArmadoEnCarrito(0, 3)
         )
 
         val recyclerView = binding.rclCarritoItems
