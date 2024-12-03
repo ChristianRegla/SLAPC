@@ -7,6 +7,11 @@ abstract class ItemEnCarrito(protected val idReferencia: Int, val tipoElemento: 
     var subtotal: Double = 0.0
     var incluirGarantia: Boolean = false
 
+    fun cambiarCantidad(nuevaCantidad: Int) {
+        cantidad = nuevaCantidad
+        subtotal = calcularSubtotal()
+    }
+
     abstract fun calcularSubtotal(): Double
     abstract fun obtenerImagen(): Int
     abstract fun obtenerNombre(): String
