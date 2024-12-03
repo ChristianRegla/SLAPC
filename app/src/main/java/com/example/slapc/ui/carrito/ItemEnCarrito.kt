@@ -12,6 +12,10 @@ abstract class ItemEnCarrito(protected val idReferencia: Int, val tipoElemento: 
         subtotal = calcularSubtotal()
     }
 
+    fun alternarGarantia() {
+        incluirGarantia = !incluirGarantia
+    }
+
     abstract fun calcularSubtotal(): Double
     abstract fun obtenerImagen(): Int
     abstract fun obtenerNombre(): String

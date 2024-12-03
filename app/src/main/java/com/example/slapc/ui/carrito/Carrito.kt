@@ -21,4 +21,8 @@ object Carrito {
         items[itemNum].cambiarCantidad(nuevaCantidad)
         return items[itemNum]
     }
+
+    fun alternarGarantiaDeItem(itemNum: Int) {
+        items[itemNum].alternarGarantia()
+    }
 }

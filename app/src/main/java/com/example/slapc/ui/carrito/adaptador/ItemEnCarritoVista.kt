@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.slapc.ui.carrito.ItemEnCarrito
 import com.example.slapc.R
+import com.example.slapc.ui.carrito.Carrito
 import com.example.slapc.ui.carrito.CarritoFragment
 
 class ItemEnCarritoVista(
@@ -32,11 +33,13 @@ class ItemEnCarritoVista(
         txtNombre.text = modeloItem.obtenerNombre()
         txtCantidad.text = "Cant: ${modeloItem.cantidad}"
         txtSubtotal.text = "$${String.format("%.2f", modeloItem.subtotal)}"
-        tgbGarantia.isActivated = modeloItem.incluirGarantia
+        tgbGarantia.isChecked = modeloItem.incluirGarantia
 
         ibtnEditarCantidad.setOnClickListener {
             onCantidadEditada(itemNum, { nuevoModelo -> actualizarDatosDeCantidad(nuevoModelo)})
         }
+
+        tgbGarantia.setOnClickListener { Carrito.alternarGarantiaDeItem(itemNum) }
     }
 
     fun actualizarDatosDeCantidad(nuevoModelo: ItemEnCarrito) {
