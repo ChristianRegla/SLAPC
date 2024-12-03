@@ -1,4 +1,4 @@
-package com.example.slapc.ui.admin
+package com.example.slapc
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,9 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.slapc.ArmadosActivity
-import com.example.slapc.CRUDComponentesActivity
-import com.example.slapc.R
 import com.google.android.material.button.MaterialButton
 
 class AdminMenuFragment : Fragment() {

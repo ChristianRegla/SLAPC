@@ -1,4 +1,4 @@
-package com.example.slapc.ui.register
+package com.example.slapc
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -11,7 +11,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.slapc.R
+import com.example.slapc.usuarios
+
 
 class RegisterFragment : Fragment() {
 
@@ -43,36 +44,36 @@ class RegisterFragment : Fragment() {
             val address = addressEditText.text.toString().trim()
             val deliveryTime = deliveryTimeEditText.text.toString().trim()
 
-            if (username.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
-                if (addUser(username, email, password, address, deliveryTime)) {
-                    Toast.makeText(requireContext(), "Usuario registrado exitosamente", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.nav_login)
-                } else {
-                    Toast.makeText(requireContext(), "El usuario ya existe", Toast.LENGTH_SHORT).show()
-                }
+            if(username.isEmpty() || email.isEmpty() || password.isEmpty() || address.isEmpty() || deliveryTime.isEmpty()) {
+                Toast.makeText(requireContext(), "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(requireContext(), "Por favor completa todos los campos", Toast.LENGTH_SHORT).show()
+                registrarUsuario(username, email, password, address, deliveryTime)
             }
         }
     }
 
-    private fun addUser(
-        username: String,
-        email: String,
-        password: String,
-        address: String,
-        deliveryTime: String
-    ): Boolean {
-        val users = sharedPreferences.getStringSet("users", mutableSetOf()) ?: mutableSetOf()
-
-        // Verifica si el usuario ya existe
-        if (users.any { it.startsWith("$username:") }) {
-            return false
+    private fun registrarUsuario(
+        nombre: String,
+        correo: String,
+        contraseña: String,
+        direccionEntrega: String,
+        horarioEntrega: String
+    ) {
+        if(usuarios.any { it.correo == correo }) {
+            Toast.makeText(requireContext(), "El correo electrónico ya está registrado", Toast.LENGTH_SHORT).show()
+            return
+        } else {
+            val nuevoUsuario = Usuario(
+                nombre = nombre,
+                correo = correo,
+                contraseña = contraseña,
+                direccionEntrega = direccionEntrega,
+                horarioEntrega = horarioEntrega,
+                esAdmin = false
+            )
+            usuarios.add(nuevoUsuario)
+            Toast.makeText(requireContext(), "Usuario registrado exitosamente", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.nav_login)
         }
-
-        // Agrega el nuevo usuario
-        users.add("$username:$email:$password:$address:$deliveryTime")
-        sharedPreferences.edit().putStringSet("users", users).apply()
-        return true
     }
 }

@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/nav_login"
-        android:name="com.example.slapc.ui.login.LoginFragment"
+        android:name="com.example.slapc.LoginFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_login" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.slapc.ui.register.RegisterFragment"
+        android:id="@+id/nav_registro"
+        android:name="com.example.slapc.RegisterFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_register" />
 
     <fragment
         android:id="@+id/nav_admin_menu"
-        android:name="com.example.slapc.ui.admin.AdminMenuFragment"
+        android:name="com.example.slapc.AdminMenuFragment"
         android:label="@string/menu_admin"
         tools:layout="@layout/fragment_admin_menu" />
 
