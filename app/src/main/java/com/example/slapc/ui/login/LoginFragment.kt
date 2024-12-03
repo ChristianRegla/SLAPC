@@ -26,7 +26,7 @@ class LoginFragment : Fragment() {
 
     private val defaultUsers = mapOf(
         "admin" to "admin123",
-        "user1" to "userpass",
+        "Slappy" to "12345",
         "user2" to "password2"
     )
 
@@ -59,7 +59,7 @@ class LoginFragment : Fragment() {
                     findNavController().navigate(R.id.nav_admin_menu)
                 } else {
 
-                    findNavController().navigate(R.id.nav_gallery)
+                    findNavController().navigate(R.id.nav_catalogo)
                 }
             } else {
                 Toast.makeText(requireContext(), "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
@@ -69,6 +69,12 @@ class LoginFragment : Fragment() {
         registerTextView.setOnClickListener {
             findNavController().navigate(R.id.nav_gallery)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        limpiarCampos()
     }
 
     private fun initializeDefaultUsers() {
@@ -90,5 +96,10 @@ class LoginFragment : Fragment() {
 
 
         return users.any { it.split(":")[0] == username && it.split(":")[1] == password }
+    }
+
+    private fun limpiarCampos() {
+        usernameEditText.text.clear()
+        passwordEditText.text.clear()
     }
 }

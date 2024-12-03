@@ -62,27 +62,28 @@
                     android:id="@+id/agregarComponenteButton"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:text="Agregar componente"
+                    android:text="@string/panel_componentes"
                     app:cornerRadius="32dp"
                     android:textColor="@color/white"
-                    android:drawableLeft="@drawable/ic_add_component"
+                    android:drawableLeft="@drawable/ic_edit_component"
                     android:backgroundTint="@color/text_secondary"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/agregarArmadoButton"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:text="Agregar Armado"
+                    android:text="@string/agregar_armado"
                     app:cornerRadius="32dp"
                     android:textColor="@color/white"
-                    android:drawableLeft="@drawable/ic_edit_component"
+                    android:drawableLeft="@drawable/ic_add_component"
                     app:backgroundTint="@color/text_secondary"
                     android:layout_below="@id/agregarComponenteButton"/>
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSalirAdmin"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:text="Eliminar componente"
+                    android:text="@string/salir_admin"
                     app:cornerRadius="32dp"
                     android:textColor="@color/white"
                     android:drawableLeft="@drawable/ic_delete_component"

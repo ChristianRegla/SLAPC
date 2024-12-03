@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.slapc.ArmadosActivity
 import com.example.slapc.CRUDComponentesActivity
 import com.example.slapc.R
@@ -32,6 +33,11 @@ class AdminMenuFragment : Fragment() {
         agregarArmadoButton.setOnClickListener {
             val intent = Intent(requireContext(), ArmadosActivity::class.java)
             startActivity(intent)
+        }
+
+        val btnSalirAdmin = view.findViewById<MaterialButton>(R.id.btnSalirAdmin)
+        btnSalirAdmin.setOnClickListener {
+            findNavController().navigate(R.id.nav_login)
         }
     }
 }
