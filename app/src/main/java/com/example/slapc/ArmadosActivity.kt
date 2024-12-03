@@ -1,10 +1,22 @@
 package com.example.slapc
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import java.util.Locale
 
 class ArmadosActivity : AppCompatActivity() {
+
+    private val categoriasValidas = listOf(
+        CategoriaComponente.MOTHERBOARD,
+        CategoriaComponente.FUENTE_DE_PODER,
+        CategoriaComponente.RAM,
+        CategoriaComponente.ALMACENAMIENTO,
+        CategoriaComponente.CPU,
+        CategoriaComponente.GABINETE,
+        CategoriaComponente.GPU
+    )
 
     private lateinit var spinnerMotherboard: Spinner
     private lateinit var spinnerPowerSupply: Spinner
@@ -82,15 +94,28 @@ class ArmadosActivity : AppCompatActivity() {
         categorySpinner.adapter = adapter
     }
 
-
     private fun setupSpinner(spinner: Spinner, categoria: CategoriaComponente) {
-        // Obtener componentes de la categoría específica desde el repositorio
-        val componentNames = RepositorioComponentes.obtenerComponentes().filter { it.categoria == categoria }
-            .map { it.nombre }
+        if (categoria in categoriasValidas) {
+            val componentNames = mutableListOf<String>()
+            componentNames.add(when (categoria) {
+                CategoriaComponente.MOTHERBOARD -> getString(R.string.select_motherboard)
+                CategoriaComponente.FUENTE_DE_PODER -> getString(R.string.select_power_supply)
+                CategoriaComponente.RAM -> getString(R.string.select_ram)
+                CategoriaComponente.ALMACENAMIENTO -> getString(R.string.select_storage)
+                CategoriaComponente.CPU -> getString(R.string.select_processor)
+                CategoriaComponente.GABINETE -> getString(R.string.select_cabinet)
+                CategoriaComponente.GPU -> getString(R.string.select_graphics_card)
+                // No es necesario agregar ramas para MONITOR, MOUSE y TECLADO
+                else -> throw IllegalArgumentException("Categoría de componente no reconocida")
+            })
+            componentNames.addAll(RepositorioComponentes.obtenerComponentes().filter { it.categoria == categoria }
+                .map { it.nombre })
 
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, componentNames)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = adapter
+            val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, componentNames)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
+            spinner.setSelection(0) // Seleccionar la primera opción ("Seleccione...") por defecto
+        }
     }
 
     private fun saveArmado() {
@@ -98,62 +123,93 @@ class ArmadosActivity : AppCompatActivity() {
 
         if (selectedCategory == getString(R.string.default_category_label)) {
             Toast.makeText(this, "Debes seleccionar una categoría de armado válida", Toast.LENGTH_SHORT).show()
+            return
         }
-        else if(
-            nameEditText.text.isEmpty() || nameEditText.text.isBlank() ||
-            discountEditText.text.isEmpty() || discountEditText.text.isBlank() ||
-            descriptionEditText.text.isEmpty() || descriptionEditText.text.isBlank()
-        ){
+
+        if (nameEditText.text.isBlank() || discountEditText.text.isBlank() || descriptionEditText.text.isBlank()) {
             Toast.makeText(this, "Debes llenar todos los datos", Toast.LENGTH_SHORT).show()
+            return
         }
-        else {
 
-            val selectedMotherboard = spinnerMotherboard.selectedItem as String
-            val selectedPowerSupply = spinnerPowerSupply.selectedItem as String
-            val selectedRam = spinnerRam.selectedItem as String
-            val selectedStorage = spinnerStorage.selectedItem as String
-            val selectedProcessor = spinnerProcessor.selectedItem as String
-            val selectedCabinet = spinnerCabinet.selectedItem as String
-            val selectedGraphicsCard = spinnerGraphicsCard.selectedItem as String
+        val selectedMotherboard = spinnerMotherboard.selectedItem as String
+        val selectedPowerSupply = spinnerPowerSupply.selectedItem as String
+        val selectedRam = spinnerRam.selectedItem as String
+        val selectedStorage = spinnerStorage.selectedItem as String
+        val selectedProcessor = spinnerProcessor.selectedItem as String
+        val selectedCabinet = spinnerCabinet.selectedItem as String
+        val selectedGraphicsCard = spinnerGraphicsCard.selectedItem as String
 
-            val discount = discountEditText.text.toString().toDoubleOrNull() ?: 0.0
+        val discount = discountEditText.text.toString().toDoubleOrNull() ?: 0.0
 
-            // Obtener precios de los componentes seleccionados
-            val totalPrice = calculateTotalPrice(
-                selectedMotherboard, selectedPowerSupply, selectedRam,
-                selectedStorage, selectedProcessor, selectedCabinet,
-                selectedGraphicsCard
-            )
+        // Validar que se hayan seleccionado componentes válidos (excepto la tarjeta gráfica)
+        if (selectedMotherboard == getString(R.string.select_motherboard) ||
+            selectedPowerSupply == getString(R.string.select_power_supply) ||
+            selectedRam == getString(R.string.select_ram) ||
+            selectedStorage == getString(R.string.select_storage) ||
+            selectedProcessor == getString(R.string.select_processor) ||
+            selectedCabinet == getString(R.string.select_cabinet)
+        ) {
+            Toast.makeText(this, "Debes seleccionar un componente válido en cada spinner", Toast.LENGTH_SHORT).show()
+            return
+        }
 
-            val finalPrice = totalPrice - (totalPrice * (discount / 100))
+        // Crear la lista de componentes, incluyendo la tarjeta gráfica solo si está seleccionada
+        val componentes = mutableListOf(
+            RepositorioComponentes.buscarComponente(selectedMotherboard)!!,
+            RepositorioComponentes.buscarComponente(selectedPowerSupply)!!,
+            RepositorioComponentes.buscarComponente(selectedRam)!!,
+            RepositorioComponentes.buscarComponente(selectedStorage)!!,
+            RepositorioComponentes.buscarComponente(selectedProcessor)!!,
+            RepositorioComponentes.buscarComponente(selectedCabinet)!!
+        )
+        if (selectedGraphicsCard != getString(R.string.select_graphics_card)) {
+            componentes.add(RepositorioComponentes.buscarComponente(selectedGraphicsCard)!!)
+        }
 
-            // Crear el objeto Armado
+        // Calcular el precio total de los componentes
+        val totalPrice = componentes.sumOf { it.precio }
+
+        // Calcular el precio final con el descuento aplicado
+        val finalPrice = totalPrice - (totalPrice * (discount / 100))
+
+        // Buscar el armado existente por su nombre
+        val armadoExistente = RepositorioArmados.buscarArmadosPorNombre(nameEditText.text.toString()).firstOrNull()
+
+        if (armadoExistente != null) {
+            // Actualizar el armado existente
+            armadoExistente.descuento = discount
+            armadoExistente.categoria = selectedCategory
+            armadoExistente.descripcion = descriptionEditText.text.toString()
+            armadoExistente.componentes = componentes
+            armadoExistente.precio = finalPrice
+
+            if (RepositorioArmados.actualizarArmado(armadoExistente.id, armadoExistente)) {
+                Toast.makeText(this, "Armado actualizado correctamente", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Precio final: $finalPrice", Toast.LENGTH_SHORT).show()
+                clearForm()
+            } else {
+                Toast.makeText(this, "Error al actualizar el armado", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            // Crear un nuevo armado
             val armado = Armado(
-                id = generateArmadoId(),  // Genera un ID único
+                id = generateArmadoId(),
                 nombre = nameEditText.text.toString(),
                 descuento = discount,
-                categoria = "Gaming",  // Por ejemplo
+                categoria = selectedCategory,
                 descripcion = descriptionEditText.text.toString(),
-                componentes = listOf(), // Deberías asignar los objetos correspondientes de Componente
+                componentes = componentes,
                 precio = finalPrice
             )
 
-            // Guardar el armado (por ejemplo, en una lista o base de datos)
-            Toast.makeText(this, "Armado guardado correctamente", Toast.LENGTH_SHORT).show()
-
-            // Limpiar el formulario después de guardar
-            clearForm()
-            Toast.makeText(this, "Total Calculado: $finalPrice", Toast.LENGTH_SHORT).show()
+            if (RepositorioArmados.agregarArmado(armado)) {
+                Toast.makeText(this, "Armado guardado correctamente", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Precio final: $finalPrice", Toast.LENGTH_SHORT).show()
+                clearForm()
+            } else {
+                Toast.makeText(this, "El armado ya existe", Toast.LENGTH_SHORT).show()
+            }
         }
-    }
-
-    private fun calculateTotalPrice(vararg componentNames: String): Double {
-        var total = 0.0
-        for (componentName in componentNames) {
-            val component = RepositorioComponentes.obtenerComponentes().find { it.nombre == componentName }
-            total += component?.precio ?: 0.0
-        }
-        return total
     }
 
     private fun clearForm() {
@@ -167,6 +223,7 @@ class ArmadosActivity : AppCompatActivity() {
         spinnerProcessor.setSelection(0)
         spinnerCabinet.setSelection(0)
         spinnerGraphicsCard.setSelection(0)
+        categorySpinner.setSelection(0)
     }
 
     private fun searchArmado() {
@@ -185,7 +242,7 @@ class ArmadosActivity : AppCompatActivity() {
 
             // Rellenar el formulario con los datos del primer armado encontrado
             nameEditText.setText(firstArmado.nombre)
-            discountEditText.setText(firstArmado.descuento.toString())
+            discountEditText.setText(String.format(Locale.getDefault(), "%.2f", firstArmado.descuento))
             descriptionEditText.setText(firstArmado.descripcion)
 
             // Llenar los spinners con los componentes seleccionados
@@ -196,6 +253,13 @@ class ArmadosActivity : AppCompatActivity() {
             setSpinnerSelection(spinnerProcessor, firstArmado.componentes)
             setSpinnerSelection(spinnerCabinet, firstArmado.componentes)
             setSpinnerSelection(spinnerGraphicsCard, firstArmado.componentes)
+
+            for (i in 0 until categorySpinner.count) {
+                if (categorySpinner.getItemAtPosition(i).toString() == firstArmado.categoria) {
+                    categorySpinner.setSelection(i)
+                    break
+                }
+            }
 
             Toast.makeText(this, "Armado encontrado", Toast.LENGTH_SHORT).show()
         } else {
@@ -210,16 +274,49 @@ class ArmadosActivity : AppCompatActivity() {
     }
 
     private fun setSpinnerSelection(spinner: Spinner, componentes: List<Componente>) {
-        // Establece el valor del Spinner basándote en los componentes
-        val selectedComponent = componentes.find { it.nombre == spinner.selectedItem }
-        spinner.setSelection(componentes.indexOf(selectedComponent))
+        val componentName = componentes.find { it.categoria == getComponentCategory(spinner) }?.nombre
+        if (componentName != null) {
+            for (i in 0 until spinner.count) {
+                if (spinner.getItemAtPosition(i).toString() == componentName) {
+                    Log.d("SpinnerSelection", "Seleccionando componente: $componentName en posición: $i")
+                    spinner.setSelection(i)
+                    break
+                }
+            }
+        }
+    }
+
+    private fun getComponentCategory(spinner: Spinner): CategoriaComponente {
+        return when (spinner.id) {
+            R.id.spinnerMotherboard -> CategoriaComponente.MOTHERBOARD
+            R.id.spinnerPowerSupply -> CategoriaComponente.FUENTE_DE_PODER
+            R.id.spinnerRam -> CategoriaComponente.RAM
+            R.id.spinnerStorage -> CategoriaComponente.ALMACENAMIENTO
+            R.id.spinnerProcessor -> CategoriaComponente.CPU
+            R.id.spinnerCabinet -> CategoriaComponente.GABINETE
+            R.id.spinnerGraphicsCard -> CategoriaComponente.GPU
+            else -> throw IllegalArgumentException("Spinner no reconocido")
+        }
     }
 
     private fun deleteArmado() {
-        // Aquí va la lógica para borrar el armado
+        val nameToDelete = nameEditText.text.toString().trim()
+
+        if (nameToDelete.isEmpty()) {
+            Toast.makeText(this, "Por favor ingrese un nombre para eliminar", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val armado = RepositorioArmados.buscarArmadosPorNombre(nameToDelete).firstOrNull()
+        if (armado != null && RepositorioArmados.quitarArmado(armado.id)) {
+            Toast.makeText(this, "Armado eliminado correctamente", Toast.LENGTH_SHORT).show()
+            clearForm()
+        } else {
+            Toast.makeText(this, "Armado no encontrado", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun generateArmadoId(): Int {
-        return (1..1000).random()  // Solo un ejemplo de generación de ID
+        return (1..1000).random()
     }
 }

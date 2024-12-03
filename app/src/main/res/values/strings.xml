@@ -20,6 +20,14 @@
         <item>Doméstico</item>
     </string-array>
 
+    <string name="select_motherboard">Seleccione placa madre</string>
+    <string name="select_power_supply">Seleccione fuente de poder</string>
+    <string name="select_ram">Seleccione memoria RAM</string>
+    <string name="select_storage">Seleccione almacenamiento</string>
+    <string name="select_processor">Seleccione procesador</string>
+    <string name="select_cabinet">Seleccione gabinete</string>
+    <string name="select_graphics_card">Seleccione tarjeta gráfica</string>
+
     <string name="categoria">Categoría</string>
     <string name="detalles_tecnicos">Detalles técnicos</string>
     <string name="imagen">Imagen</string>

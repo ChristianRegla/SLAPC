@@ -11,10 +11,6 @@ object RepositorioArmados {
         return true
     }
 
-    fun obtenerArmado(id: Int): Armado? {
-        return catalogoArmados.find { it.id == id }
-    }
-
     fun actualizarArmado(id: Int, armado: Armado): Boolean {
         val index = catalogoArmados.indexOfFirst { it.id == id }
 
@@ -32,16 +28,5 @@ object RepositorioArmados {
 
     fun buscarArmadosPorNombre(nombre: String): List<Armado> {
         return catalogoArmados.filter { it.nombre.contains(nombre, ignoreCase = true) }
-    }
-
-    fun obtenerTodosArmados(): List<Armado> {
-        return catalogoArmados
-    }
-
-    /**
-     * Calcula el precio total de todos los armados en el repositorio.
-     */
-    fun calcularPrecioTotalArmados(): Double {
-        return catalogoArmados.sumOf { it.precio }
     }
 }
