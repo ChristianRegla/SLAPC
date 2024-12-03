@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     tools:context=".ui.catalogo.CatalogoFragment"
+    android:background="@color/background_dark"
     tools:ignore="ExtraText">
 
     <androidx.appcompat.widget.SearchView

@@ -4,8 +4,10 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    app:cardCornerRadius="12dp"
+    app:cardElevation="8dp"
+    app:cardBackgroundColor="@color/white"
+    android:shadowColor="@color/black">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,7 +27,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Nombre Producto"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"/>
 
         <TextView
             android:id="@+id/tvDescription"
@@ -33,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Descripción del producto"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textColor="@color/gray"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
