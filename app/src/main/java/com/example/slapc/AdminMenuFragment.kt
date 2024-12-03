@@ -34,6 +34,9 @@ class AdminMenuFragment : Fragment() {
 
         val btnSalirAdmin = view.findViewById<MaterialButton>(R.id.btnSalirAdmin)
         btnSalirAdmin.setOnClickListener {
+            // Se actualiza el nav header a usuario no registrado porque se cerró sesión
+            (activity as MainActivity).actualizarNavHeader(null, null)
+            // Se vuelve al login
             findNavController().navigate(R.id.nav_login)
         }
     }

@@ -63,6 +63,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Este sería el menú default, oculta el cerrar sesión y el menú del administrador
+    // dejando solo visible el login y por defecto el catálogo de productos siempre es visible
     private fun configurarMenu() {
         Log.d("DEBUG", "ID nav_login: ${R.id.nav_login}")
         val menu = navView.menu
@@ -71,6 +73,7 @@ class MainActivity : AppCompatActivity() {
         menu.findItem(R.id.nav_login).isVisible = true
     }
 
+    // Cuando se inicia sesión se usa este, oculta la opción del login y muestra el cerrar sesión
     fun actualizarMenuParaCliente() {
         val menu = navView.menu
         menu.findItem(R.id.nav_login).isVisible = false
@@ -81,21 +84,32 @@ class MainActivity : AppCompatActivity() {
     fun cerrarSesion() {
         try{
             val navController = findNavController(R.id.nav_host_fragment_content_main)
-            navController.navigate(R.id.nav_login) {
-                popUpTo(R.id.nav_login) { inclusive = true }
+            navController.navigate("login") {
+                popUpTo("login") { inclusive = true }
             }
+            // Se deja el menú default
             configurarMenu()
+            // Actualizamos el nav header a usuario no registrado porque se cerró sesión
+            actualizarNavHeader(null, null)
+            // Cerramos el menú
+            drawerLayout.closeDrawers()
         } catch (e: Exception) {
+            // Por si falla :c
             Log.e("ERROR", "Error en cerrarSesion: ${e.message}")
         }
 
     }
 
+    // Estoes para actualizar el nav header con los datos del usuario que inició sesión
     fun actualizarNavHeader(nombre: String?, correo: String?) {
+        //Se obtiene el navHeader
         val headerView = navView.getHeaderView(0)
+
+        // Se obtienen el username y el email
         val usernameTextView = headerView.findViewById<TextView>(R.id.nav_header_username)
         val emailTextView = headerView.findViewById<TextView>(R.id.nav_header_email)
 
+        // Se actualiza el nav header con los datos del usuario si es que no es null
         if(nombre != null && correo != null) {
             usernameTextView.text = nombre
             emailTextView.text = correo

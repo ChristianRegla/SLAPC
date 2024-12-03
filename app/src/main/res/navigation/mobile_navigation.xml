@@ -9,7 +9,8 @@
         android:id="@+id/nav_login"
         android:name="com.example.slapc.LoginFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login"
+        app:route="login"/>
 
     <fragment
         android:id="@+id/nav_registro"
@@ -28,6 +29,5 @@
         android:name="com.example.slapc.ui.catalogo.CatalogoFragment"
         android:label="@string/catalogo_prin"
         tools:layout="@layout/fragment_catalogo" />
-
 
 </navigation>

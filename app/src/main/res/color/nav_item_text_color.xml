@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Esto se creó para darle estilo al menú del navHeader, no lo borren -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:color="@color/colorOnFocus" android:state_checked="true" />
     <item android:color="@color/colorDefault" />
