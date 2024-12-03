@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.slapc.ui.carrito.ItemEnCarrito
 import com.example.slapc.R
+import com.example.slapc.ui.carrito.Carrito
 import com.example.slapc.ui.carrito.CarritoFragment
 
 class ItemEnCarritoAdaptador(
-    private val listaItems: List<ItemEnCarrito>,
+    private var listaItems: List<ItemEnCarrito>,
     val onCantidadEditada: (
         itemNum: Int,
         callbackRedibujo: (nuevoModelo: ItemEnCarrito) -> Unit
@@ -24,5 +25,10 @@ class ItemEnCarritoAdaptador(
     override fun onBindViewHolder(holder: ItemEnCarritoVista, position: Int) {
         val item = listaItems[position]
         holder.renderizarDatos(item, position)
+    }
+
+    fun actualizarListaItems() {
+        listaItems = Carrito.obtenerItems()
+        notifyDataSetChanged()
     }
 }

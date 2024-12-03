@@ -9,6 +9,8 @@ object Carrito {
     var total: Double = 0.0
     private val garantias = mutableListOf<String>()
 
+    private var onItemEliminado: (() -> Unit)? = null
+
     fun agregarItem(item: ItemEnCarrito) {
         items.add(item)
     }
@@ -24,5 +26,18 @@ object Carrito {
 
     fun alternarGarantiaDeItem(itemNum: Int) {
         items[itemNum].alternarGarantia()
+    }
+
+    fun agregarCallbackDeEliminacion(callback: () -> Unit) {
+        onItemEliminado = callback
+    }
+
+    fun quitarCallbackDeEliminacion() {
+        onItemEliminado = null
+    }
+
+    fun eliminarItem(itemNum: Int) {
+        items.removeAt(itemNum)
+        onItemEliminado?.invoke()
     }
 }

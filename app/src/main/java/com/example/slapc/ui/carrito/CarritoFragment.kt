@@ -43,9 +43,14 @@ class CarritoFragment : Fragment() {
         Carrito.agregarItem(ComponenteEnCarrito(0, 5))
         Carrito.agregarItem(ArmadoEnCarrito(0, 3))
 
+        // Muestra inicial de items de carrito.
         val recyclerView = binding.rclCarritoItems
-        recyclerView.layoutManager = LinearLayoutManager(root.context)
-        recyclerView.adapter = ItemEnCarritoAdaptador(Carrito.obtenerItems(), { itemNum, callbackRedibujo -> mostrarDialogoDeEdicionDeCantidad(itemNum, callbackRedibujo)})
+        recyclerView.layoutManager = LinearLayoutManager(binding.root.context)
+        val adapter = ItemEnCarritoAdaptador(Carrito.obtenerItems(), {itemNum, callbackRedibujo -> mostrarDialogoDeEdicionDeCantidad(itemNum, callbackRedibujo)})
+        recyclerView.adapter = adapter
+
+        // Observer para cambios en items de carrito por eliminación.
+        Carrito.agregarCallbackDeEliminacion { adapter.actualizarListaItems() }
 
         return root
     }
@@ -77,6 +82,7 @@ class CarritoFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        Carrito.quitarCallbackDeEliminacion()
         super.onDestroyView()
         _binding = null
     }

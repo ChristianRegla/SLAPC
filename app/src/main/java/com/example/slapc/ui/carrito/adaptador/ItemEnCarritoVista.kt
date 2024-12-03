@@ -40,6 +40,8 @@ class ItemEnCarritoVista(
         }
 
         tgbGarantia.setOnClickListener { Carrito.alternarGarantiaDeItem(itemNum) }
+
+        ibtnEliminar.setOnClickListener { Carrito.eliminarItem(itemNum) }
     }
 
     fun actualizarDatosDeCantidad(nuevoModelo: ItemEnCarrito) {
