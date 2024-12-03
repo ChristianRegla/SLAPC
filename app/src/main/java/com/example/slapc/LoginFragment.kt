@@ -66,11 +66,12 @@ class LoginFragment : Fragment() {
     private fun iniciarSesion(nombreUsuario: String, contraseña: String) {
         val usuario = usuarios.find { it.nombre == nombreUsuario && it.contraseña == contraseña }
         if (usuario != null) {
+            (activity as MainActivity).actualizarNavHeader(usuario.nombre, usuario.correo)
             if (usuario.esAdmin) {
                 findNavController().navigate(R.id.nav_admin_menu)
             } else {
-                findNavController().navigate(R.id.nav_catalogo)
                 (activity as MainActivity).actualizarMenuParaCliente()
+                findNavController().navigate(R.id.nav_catalogo)
             }
         }
         else {
