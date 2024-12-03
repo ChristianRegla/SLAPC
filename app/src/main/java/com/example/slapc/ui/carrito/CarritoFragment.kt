@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +25,11 @@ class CarritoFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private lateinit var txtSubtotal: TextView
+    private lateinit var txtGarantias: TextView
+    private lateinit var txtIVA: TextView
+    private lateinit var txtTotal: TextView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,6 +37,12 @@ class CarritoFragment : Fragment() {
     ): View {
         _binding = FragmentCarritoBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        // Obtención de componentes gráficos
+        txtSubtotal = binding.txtCarritoSubtotal
+        txtGarantias = binding.txtCarritoGarantias
+        txtIVA = binding.txtCarritoIVA
+        txtTotal = binding.txtCarritoTotal
 
         // Codigo de testing
         RepositorioComponentes.agregarComponente(Componente(
@@ -49,10 +61,23 @@ class CarritoFragment : Fragment() {
         val adapter = ItemEnCarritoAdaptador(Carrito.obtenerItems(), {itemNum, callbackRedibujo -> mostrarDialogoDeEdicionDeCantidad(itemNum, callbackRedibujo)})
         recyclerView.adapter = adapter
 
+        // Muestra inicial de valores acumulados.
+        actualizarAcumulados()
+
         // Observer para cambios en items de carrito por eliminación.
         Carrito.agregarCallbackDeEliminacion { adapter.actualizarListaItems() }
 
+        // Observer para recalculación de valores acumulados del carrito.
+        Carrito.agregarCallbackDeRecalculos { actualizarAcumulados() }
+
         return root
+    }
+
+    private fun actualizarAcumulados() {
+        txtSubtotal.text = "Subtotal: $${String.format("%.2f", Carrito.subtotal)}"
+        txtGarantias.text = "Garantías: $${String.format("%.2f", Carrito.costoGarantias)}"
+        txtIVA.text = "IVA: $${String.format("%.2f", Carrito.iva)}"
+        txtTotal.text = "Total: $${String.format("%.2f", Carrito.total)}"
     }
 
     fun mostrarDialogoDeEdicionDeCantidad(itemNum: Int, callbackRedibujo: (nuevoModelo: ItemEnCarrito) -> Unit) {
@@ -82,8 +107,9 @@ class CarritoFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        Carrito.quitarCallbackDeEliminacion()
         super.onDestroyView()
         _binding = null
+        Carrito.quitarCallbackDeEliminacion()
+        Carrito.quitarCallbackDeRecalculos()
     }
 }
