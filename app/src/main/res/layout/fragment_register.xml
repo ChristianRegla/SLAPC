@@ -19,16 +19,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/signuptitle"
-        android:text="Regístrate"
-        android:textSize="35dp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="28dp"
         android:gravity="center"
-        android:layout_margin="25dp"/>
+        android:layout_above="@id/cardView">
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/cropped_logo"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Regístrate"
+            android:id="@+id/signuptitle"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="32sp"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -119,10 +134,12 @@
                 android:padding="28dp">
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/registerButton"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:text="Registrarse"
                     app:cornerRadius="32dp"
+                    android:textColor="@color/white"
                     app:backgroundTint="@color/text_secondary"/>
             </LinearLayout>
 

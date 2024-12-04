@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background="@drawable/background_register"
+        tools:context=".ArmadosActivity">
+
+        <TextView
+            android:id="@+id/headerTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/crear_armado"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@color/background_dark"
+            android:textColor="#FFFFFF"
+            android:padding="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardBackgroundColor="@color/background_dark"
+            app:layout_constraintTop_toBottomOf="@+id/headerTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <EditText
+                    android:id="@+id/nameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="@string/nombre_armado"
+                    android:inputType="text"
+                    android:layout_marginTop="8dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:background="#30FFFFFF"/>
+
+                <EditText
+                    android:id="@+id/discountEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:hint="@string/descuento"
+                    android:inputType="number"
+                    android:textColor="@color/white"
+                    android:background="#30FFFFFF"
+                    android:textColorHint="@color/white" />
+
+                <!-- Categoría (Spinner) -->
+                <Spinner
+                    android:id="@+id/categorySpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:background="#30FFFFFF"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"
+                    android:spinnerMode="dropdown"
+                    android:entries="@array/categories"/>
+
+                <!-- Descripción (EditText) -->
+                <EditText
+                    android:id="@+id/descriptionEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:hint="@string/descripcion"
+                    android:background="#30FFFFFF"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"
+                    android:inputType="textMultiLine"
+                    />
+
+                <!-- Placa Madre -->
+                <TextView
+                    android:id="@+id/labelMotherboard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/placa_madre"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/descriptionEditText" />
+
+                <Spinner
+                    android:id="@+id/spinnerMotherboard"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#30FFFFFF"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"/>
+
+                <!-- Fuente de Poder -->
+                <TextView
+                    android:id="@+id/labelPowerSupply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/fuente_poder"
+                    android:textColor="@color/white"/>
+
+                <Spinner
+                    android:id="@+id/spinnerPowerSupply"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#30FFFFFF"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"/>
+
+                <!-- RAM -->
+                <TextView
+                    android:id="@+id/labelRam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/RAM"
+                    android:textColor="@color/white"/>
+
+                <Spinner
+                    android:id="@+id/spinnerRam"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#30FFFFFF"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white" />
+
+                <!-- Almacenamiento -->
+                <TextView
+                    android:id="@+id/labelStorage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/almacenamiento"
+                    android:textColor="@color/white"/>
+
+                <Spinner
+                    android:id="@+id/spinnerStorage"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#30FFFFFF"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"/>
+
+                <!-- Procesador -->
+                <TextView
+                    android:id="@+id/labelProcessor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/procesador"
+                    android:textColor="@color/white"/>
+
+                <Spinner
+                    android:id="@+id/spinnerProcessor"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#30FFFFFF"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white" />
+
+                <!-- Gabinete -->
+                <TextView
+                    android:id="@+id/labelCabinet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/gabinete"
+                    android:textColor="@color/white"/>
+
+                <Spinner
+                    android:id="@+id/spinnerCabinet"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#30FFFFFF"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white" />
+
+                <!-- Tarjeta Gráfica (Opcional) -->
+                <TextView
+                    android:id="@+id/labelGraphicsCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textColor="@color/white"
+                    android:text="@string/tarjeta_grafica"/>
+
+                <Spinner
+                    android:id="@+id/spinnerGraphicsCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#30FFFFFF"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <ImageButton
+                        android:id="@+id/saveButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:contentDescription="@string/agregar"
+                        android:src="@android:drawable/ic_menu_save"
+                        android:backgroundTint="@color/text_secondary" />
+
+                    <ImageButton
+                        android:id="@+id/deleteButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:contentDescription="@string/borrar"
+                        android:src="@android:drawable/ic_menu_delete"
+                        android:backgroundTint="@color/text_secondary" />
+
+                    <ImageButton
+                        android:id="@+id/searchButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:contentDescription="@string/buscar"
+                        android:src="@android:drawable/ic_menu_search"
+                        android:backgroundTint="@color/text_secondary" />
+
+                    <Button
+                        android:id="@+id/exitButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/text_secondary"
+                        android:text="@string/salir"
+                        android:textColor="@color/white"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
