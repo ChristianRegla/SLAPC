@@ -134,7 +134,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="¡Soy nuevo en SLAPC! Quiero registrarme"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/text_secondary"
                     android:layout_centerVertical="true"
                     android:alpha="0.7"/>
             </RelativeLayout>

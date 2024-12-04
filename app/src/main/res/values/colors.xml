@@ -9,6 +9,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#FF888888</color>"
 
+    <color name="colorOnFocus">#00ADB5</color>
+    <color name="colorDefault">#EEEEEE</color>
+
+
 
     <color name="background_light">#EEEEEE</color>
     <color name="background_dark">#222831</color>
