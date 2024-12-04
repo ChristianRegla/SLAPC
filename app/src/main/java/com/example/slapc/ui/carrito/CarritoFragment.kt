@@ -1,21 +1,27 @@
 package com.example.slapc.ui.carrito
 
 import android.content.DialogInterface
+import android.icu.util.TimeZone
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.slapc.CategoriaComponente
 import com.example.slapc.Componente
+import com.example.slapc.Pedido
 import com.example.slapc.R
 import com.example.slapc.RepositorioComponentes
+import com.example.slapc.RepositorioPedidos
 import com.example.slapc.databinding.FragmentCarritoBinding
 import com.example.slapc.ui.carrito.adaptador.ItemEnCarritoAdaptador
+import java.util.Calendar
 
 class CarritoFragment : Fragment() {
 
@@ -29,6 +35,7 @@ class CarritoFragment : Fragment() {
     private lateinit var txtGarantias: TextView
     private lateinit var txtIVA: TextView
     private lateinit var txtTotal: TextView
+    private lateinit var btnComprar: Button
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +50,7 @@ class CarritoFragment : Fragment() {
         txtGarantias = binding.txtCarritoGarantias
         txtIVA = binding.txtCarritoIVA
         txtTotal = binding.txtCarritoTotal
+        btnComprar = binding.btnCarritoComprar
 
         // Codigo de testing
         RepositorioComponentes.agregarComponente(Componente(
@@ -70,6 +78,8 @@ class CarritoFragment : Fragment() {
         // Observer para recalculación de valores acumulados del carrito.
         Carrito.agregarCallbackDeRecalculos { actualizarAcumulados() }
 
+        btnComprar.setOnClickListener { comprarCarrito() }
+
         return root
     }
 
@@ -78,6 +88,55 @@ class CarritoFragment : Fragment() {
         txtGarantias.text = "Garantías: $${String.format("%.2f", Carrito.costoGarantias)}"
         txtIVA.text = "IVA: $${String.format("%.2f", Carrito.iva)}"
         txtTotal.text = "Total: $${String.format("%.2f", Carrito.total)}"
+    }
+
+    private fun comprarCarrito() {
+        // Obtener datos preexistentes
+        val nombresItems = Carrito.copiarNombresComponentes()
+        val garantias = Carrito.copiarGarantias()
+        val total = Carrito.total
+
+        // Obtener datos de tiempo actuales
+        val calendario = android.icu.util.Calendar.getInstance(TimeZone.getTimeZone("GMT-06:00"))
+        val dia = dosCifrasDe(calendario.get(Calendar.DAY_OF_MONTH))
+        val mes = dosCifrasDe(calendario.get(Calendar.MONTH) + 1)
+        val anio = calendario.get(Calendar.YEAR)
+
+        // Obtener datos de tiempo de entrega
+        calendario.add(Calendar.DATE, 5)
+        val diaEntrega = dosCifrasDe(calendario.get(Calendar.DAY_OF_MONTH))
+        val mesEntrega = dosCifrasDe(calendario.get(Calendar.MONTH) + 1)
+        val anioEntrega = dosCifrasDe(calendario.get(Calendar.YEAR))
+        val horas = dosCifrasDe(calendario.get(Calendar.HOUR_OF_DAY))
+        val minutos = dosCifrasDe(calendario.get(Calendar.MINUTE))
+        val segundos = dosCifrasDe(calendario.get(Calendar.SECOND))
+
+        // Crear strings informativas
+        val identificador = "$anio$mes$dia$horas$minutos$segundos"
+        val fechaCompra = "$dia/$mes/$anio"
+        val horaEntrega = "$horas:$minutos"
+        val fechaEntrega = "$diaEntrega/$mesEntrega/$anioEntrega"
+
+        // Crear pedido
+        RepositorioPedidos.agregarPedido(Pedido(
+            identificador,
+            fechaCompra,
+            fechaEntrega,
+            horaEntrega,
+            nombresItems,
+            total,
+            garantias
+        ))
+
+        // Vaciar listado del carrito
+        Carrito.reiniciar()
+
+        // TODO: Cambiar navegación a la ventana de pedidos
+        findNavController().navigate(R.id.nav_home)
+    }
+
+    private fun dosCifrasDe(numero: Int): String {
+        return String.format("%02d", numero)
     }
 
     fun mostrarDialogoDeEdicionDeCantidad(itemNum: Int, callbackRedibujo: (nuevoModelo: ItemEnCarrito) -> Unit) {

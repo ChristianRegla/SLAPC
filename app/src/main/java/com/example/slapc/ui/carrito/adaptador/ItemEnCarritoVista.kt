@@ -5,13 +5,10 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.ToggleButton
-import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.slapc.ui.carrito.ItemEnCarrito
 import com.example.slapc.R
 import com.example.slapc.ui.carrito.Carrito
-import com.example.slapc.ui.carrito.CarritoFragment
 
 class ItemEnCarritoVista(
     view: View,

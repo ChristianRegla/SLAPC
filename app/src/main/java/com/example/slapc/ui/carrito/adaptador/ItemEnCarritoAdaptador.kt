@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.slapc.ui.carrito.ItemEnCarrito
 import com.example.slapc.R
 import com.example.slapc.ui.carrito.Carrito
-import com.example.slapc.ui.carrito.CarritoFragment
 
 class ItemEnCarritoAdaptador(
     private var listaItems: List<ItemEnCarrito>,

@@ -53,6 +53,25 @@ object Carrito {
         onRecalculoDeAcumulados = null
     }
 
+    fun copiarNombresComponentes(): List<String> {
+        val nombres = items.map { item -> item.obtenerNombre() }
+        return nombres
+    }
+
+    fun copiarGarantias(): List<String> {
+        val copiaGarantias = garantias.map { g -> g }
+        return copiaGarantias
+    }
+
+    fun reiniciar() {
+        items.clear()
+        garantias.clear()
+        subtotal = 0.0
+        costoGarantias = 0.0
+        iva = 0.0
+        total = 0.0
+    }
+
     private fun recalcularAcumulados() {
         subtotal = 0.0
         iva = 0.0
