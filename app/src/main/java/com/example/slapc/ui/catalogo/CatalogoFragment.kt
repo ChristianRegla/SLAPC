@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.appcompat.widget.SearchView
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,18 +17,21 @@ import com.example.slapc.CategoriaComponente
 import com.example.slapc.Componente
 import com.example.slapc.RepositorioComponentes
 
+
 class CatalogoFragment : Fragment() {
 
     private lateinit var productos: List<Componente> // Inicializar la lista de productos
     private lateinit var adapter: ProductoAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var spinner: Spinner
+    private lateinit var searchView: SearchView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentCatalogoBinding.inflate(inflater, container, false)
+
 
         // Configurar RecyclerView
         recyclerView = binding.recyclerView
@@ -48,6 +52,20 @@ class CatalogoFragment : Fragment() {
         adapter = ProductoAdapter(productos) // Usa la lista inicializada vacía
         recyclerView.layoutManager = GridLayoutManager(context, 2)
         recyclerView.adapter = adapter
+
+        // Configurar el SearchView
+        val searchView: androidx.appcompat.widget.SearchView = binding.searchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filtrarProductos(newText)
+                return true
+            }
+        })
+
 
         // Configurar el Spinner
         spinner = binding.spinnerCategorias
@@ -77,4 +95,10 @@ class CatalogoFragment : Fragment() {
         adapter = ProductoAdapter(filteredList)
         recyclerView.adapter = adapter
     }
+    private fun filtrarProductos(query: String?) {
+        val filteredList = productos.filter { it.nombre.contains(query ?: "", ignoreCase = true) }
+        adapter = ProductoAdapter(filteredList)
+        recyclerView.adapter = adapter
+    }
+
 }

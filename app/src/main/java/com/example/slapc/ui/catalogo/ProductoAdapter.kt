@@ -50,7 +50,7 @@ class ProductoAdapter(private val productos: List<Componente>) : RecyclerView.Ad
             intent.putExtra("nombre", producto.nombre)
             intent.putExtra("reflimagen", producto.refImagen)
             intent.putExtra("precio", producto.precio)
-            intent.putExtra("categoria", producto.categoria)
+            intent.putExtra("categoria", Componente.obtenerNombreDeCategoria(producto.categoria))
             intent.putExtra("detallesTecnicos", producto.detallesTecnicos)
             context.startActivity(intent)
         }
