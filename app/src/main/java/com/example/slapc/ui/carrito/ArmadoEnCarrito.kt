@@ -18,8 +18,8 @@ class ArmadoEnCarrito(idReferencia: Int, cantidad: Int) : ItemEnCarrito(idRefere
         return armado.obtenerPrecio() * cantidad
     }
 
-    override fun obtenerImagen(): Int {
-        return R.drawable.baseline_build_circle_24
+    override fun obtenerReferenciaImagen(): String {
+        return "baseline_build_circle_24"
     }
 
     override fun obtenerNombre(): String {

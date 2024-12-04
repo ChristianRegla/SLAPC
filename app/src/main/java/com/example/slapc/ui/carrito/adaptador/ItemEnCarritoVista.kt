@@ -11,7 +11,7 @@ import com.example.slapc.R
 import com.example.slapc.ui.carrito.Carrito
 
 class ItemEnCarritoVista(
-    view: View,
+    val view: View,
     val onCantidadEditada: (
         itemNum: Int,
         callbackRedibujo: (nuevoModelo: ItemEnCarrito) -> Unit
@@ -26,7 +26,7 @@ class ItemEnCarritoVista(
     private val ibtnEliminar: ImageButton = view.findViewById(R.id.ibtnItmCarEliminar)
 
     fun renderizarDatos(modeloItem: ItemEnCarrito, itemNum: Int) {
-        imgImagen.setImageResource(modeloItem.obtenerImagen())
+        imgImagen.setImageResource(obtenerIdImagen(modeloItem.obtenerReferenciaImagen()))
         txtNombre.text = modeloItem.obtenerNombre()
         txtCantidad.text = "Cant: ${modeloItem.cantidad}"
         txtSubtotal.text = "$${String.format("%.2f", modeloItem.subtotal)}"
@@ -39,6 +39,10 @@ class ItemEnCarritoVista(
         tgbGarantia.setOnClickListener { Carrito.alternarGarantiaDeItem(itemNum) }
 
         ibtnEliminar.setOnClickListener { Carrito.eliminarItem(itemNum) }
+    }
+
+    private fun obtenerIdImagen(referencia: String): Int {
+        return view.resources.getIdentifier(referencia, "drawable", view.context.packageName)
     }
 
     fun actualizarDatosDeCantidad(nuevoModelo: ItemEnCarrito) {

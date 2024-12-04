@@ -15,6 +15,6 @@ abstract class ItemEnCarrito(protected val idReferencia: Int, val tipoElemento: 
     }
 
     abstract fun calcularSubtotal(): Double
-    abstract fun obtenerImagen(): Int
+    abstract fun obtenerReferenciaImagen(): String
     abstract fun obtenerNombre(): String
 }

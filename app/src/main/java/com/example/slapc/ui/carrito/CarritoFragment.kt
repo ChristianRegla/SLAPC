@@ -55,7 +55,7 @@ class CarritoFragment : Fragment() {
         // Codigo de testing
         RepositorioComponentes.agregarComponente(Componente(
             "supermouse",
-            "mouse.jpg",
+            "facebook",
             99.99,
             CategoriaComponente.MOUSE,
             "Es un gran mouse"

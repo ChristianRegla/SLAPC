@@ -19,8 +19,8 @@ class ComponenteEnCarrito(idReferencia: Int, cantidad: Int) : ItemEnCarrito(idRe
     }
 
     // TODO: Cambiar stub por busqueda de imagen
-    override fun obtenerImagen(): Int {
-        return R.drawable.full_logo
+    override fun obtenerReferenciaImagen(): String {
+        return componente.refImagen
     }
 
     override fun obtenerNombre(): String {
