@@ -36,12 +36,13 @@
         <ImageView
             android:layout_width="128dp"
             android:layout_height="128dp"
-            android:src="@drawable/cropped_logo"/>
+            android:src="@drawable/cropped_logo"
+            android:contentDescription="@string/app_name"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SLAPC"
+            android:text="@string/app_name"
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"
             android:textSize="32sp"
@@ -50,7 +51,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BUILDING IDEAS"
+            android:text="@string/lema"
             android:fontFamily="sans-serif-medium"
             android:textSize="30sp"
             android:textColor="@color/text_secondary"/>
@@ -73,7 +74,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bienvenido"
+                android:text="@string/bienvenido"
                 android:textColor="@color/text_primary"
                 android:textSize="32sp"
                 android:textStyle="bold"/>
@@ -81,7 +82,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Inicia sesión con tu información"
+                android:text="@string/iniciar_sesion_con_tu_informacion"
                 android:textColor="@color/gray"
                 android:alpha="0.7"/>
 
@@ -92,7 +93,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Usuario"
+                android:text="@string/username"
                 android:textColor="@color/gray"
                 android:alpha="0.7"
                 android:textStyle="bold"/>
@@ -103,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:drawableEnd="@drawable/done_icon"
-                android:textColor="@color/text_primary"/>
+                android:textColor="@color/text_primary" />
 
             <View
                 android:layout_width="wrap_content"
@@ -112,7 +113,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Contraseña"
+                android:text="@string/password"
                 android:textColor="@color/gray"
                 android:alpha="0.7"
                 android:textStyle="bold"/>
@@ -133,7 +134,7 @@
                     android:id="@+id/registerTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="¡Soy nuevo en SLAPC! Quiero registrarme"
+                    android:text="@string/register_title"
                     android:textColor="@color/text_secondary"
                     android:layout_centerVertical="true"
                     android:alpha="0.7"/>
@@ -147,7 +148,7 @@
                 android:id="@+id/loginButton"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="Iniciar Sesión"
+                android:text="@string/iniciar_sesion"
                 app:cornerRadius="32dp"
                 android:textColor="@color/white"
                 app:backgroundTint="@color/text_secondary"/>
@@ -159,7 +160,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Recuerda seguirnos en:"
+                android:text="@string/follow_us"
                 android:textColor="@color/gray"
                 android:layout_gravity="center"
                 android:alpha="0.7"/>
@@ -176,7 +177,7 @@
                     android:layout_height="40dp"
                     android:layout_margin="12dp"
                     android:background="@drawable/facebook"
-                    android:contentDescription="Logo de Facebook"/>
+                    android:contentDescription="@string/facebook_logo"/>
 
                 <ImageView
                     android:id="@+id/youtubeImageView"
@@ -184,7 +185,7 @@
                     android:layout_height="40dp"
                     android:layout_margin="12dp"
                     android:background="@drawable/youtube"
-                    android:contentDescription="Logo de Youtube"/>
+                    android:contentDescription="@string/youtube_logo"/>
 
             </LinearLayout>
 
