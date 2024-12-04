@@ -171,16 +171,20 @@
                 android:gravity="center">
 
                 <ImageView
+                    android:id="@+id/facebookImageView"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_margin="12dp"
-                    android:background="@drawable/facebook"/>
+                    android:background="@drawable/facebook"
+                    android:contentDescription="Logo de Facebook"/>
 
                 <ImageView
+                    android:id="@+id/youtubeImageView"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_margin="12dp"
-                    android:background="@drawable/youtube"/>
+                    android:background="@drawable/youtube"
+                    android:contentDescription="Logo de Youtube"/>
 
             </LinearLayout>
 
