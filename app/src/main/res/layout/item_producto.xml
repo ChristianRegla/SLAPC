@@ -19,7 +19,8 @@
             android:id="@+id/imgProducto"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:contentDescription="Imagen del producto"/>
 
         <TextView
             android:id="@+id/tvNombre"
@@ -32,12 +33,13 @@
             android:textColor="@color/text_primary"/>
 
         <TextView
-            android:id="@+id/tvDescription"
+            android:id="@+id/tvPrecio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Descripción del producto"
-            android:textSize="14sp"
-            android:textColor="@color/gray"/>
+            android:text="Precio del producto"
+            android:textSize="16sp"
+            android:textColor="@color/text_secondary"
+            android:textStyle="bold"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
