@@ -37,11 +37,11 @@ class DetallesPedidoActivity : AppCompatActivity() {
         if (pedido != null) {
             val componentes = pedido.componentes.mapNotNull { idString ->
                 val id = idString.toIntOrNull() ?: return@mapNotNull null
-                RepositorioComponentes.obtenerComponente(id)
+                RepositorioComponentesPedidos.obtenerComponente(id)
             }
 
             Log.d("DetallesPedidoActivity", "Componentes cargados: ${componentes.size}")
-            recyclerViewProductos.adapter = ProductoAdapter(componentes)
+            recyclerViewProductos.adapter = ComponentePedidoAdapter(componentes)
 
             textDireccion.text = "Entrega en: ${pedido.fechaEntrega} a las ${pedido.horaEntrega}"
             textTotalPagar.text = "Total a pagar: $${pedido.total}"
