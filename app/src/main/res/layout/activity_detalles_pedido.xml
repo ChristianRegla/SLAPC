@@ -65,9 +65,12 @@
         android:id="@+id/button_salir"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorOnFocus"
+        android:backgroundTint="@color/purple_500"
         android:text="Salir"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -70,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         val menu = navView.menu
         menu.findItem(R.id.nav_cerrar_sesion).isVisible = false
         menu.findItem(R.id.nav_admin_menu).isVisible = false
+        menu.findItem(R.id.nav_pedido).isVisible = false
         menu.findItem(R.id.nav_login).isVisible = true
     }
 
@@ -79,6 +80,7 @@ class MainActivity : AppCompatActivity() {
         menu.findItem(R.id.nav_login).isVisible = false
         menu.findItem(R.id.nav_cerrar_sesion).isVisible = true
         menu.findItem(R.id.nav_admin_menu).isVisible = false
+        menu.findItem(R.id.nav_pedido).isVisible = true
     }
 
     fun cerrarSesion() {

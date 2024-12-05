@@ -4,6 +4,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.slapc.Componente
@@ -28,7 +29,7 @@ class DetallesPedidoActivity : AppCompatActivity() {
         textTotalPagar = findViewById(R.id.text_total_pagar)
         buttonSalir = findViewById(R.id.button_salir)
 
-        recyclerViewProductos.layoutManager = LinearLayoutManager(this)
+        recyclerViewProductos.layoutManager = GridLayoutManager(this, 2)
 
         val pedidoId = intent.getStringExtra("pedido_id")
         val pedido = RepositorioPedidos.buscarPedidoPorId(pedidoId ?: "")

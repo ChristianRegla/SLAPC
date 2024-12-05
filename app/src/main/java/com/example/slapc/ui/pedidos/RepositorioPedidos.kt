@@ -2,6 +2,7 @@ package com.example.slapc.ui.pedidos
 
 import com.example.slapc.CategoriaComponente
 import com.example.slapc.Componente
+import com.example.slapc.RepositorioComponentes
 
 object RepositorioPedidos {
     private val listaPedidos = mutableListOf<Pedido>()
@@ -14,7 +15,7 @@ object RepositorioPedidos {
             categoria = CategoriaComponente.ALMACENAMIENTO,
             detallesTecnicos = "Tornillo de acero inoxidable, medida 8x50mm"
         )
-
+        RepositorioComponentes.agregarComponente(componente1)
         val componente2 = Componente(
             nombre = "Llave inglesa",
             refImagen = "https://example.com/llave_inglesa.png",
@@ -22,14 +23,14 @@ object RepositorioPedidos {
             categoria = CategoriaComponente.FUENTE_DE_PODER,
             detallesTecnicos = "Llave inglesa ajustable de 6 pulgadas"
         )
-
+        RepositorioComponentes.agregarComponente(componente2)
         // Crear el pedido inicial
         val pedidoEjemplo = Pedido(
             id = "1001",
             fechaCompra = "2024-12-04",
             fechaEntrega = "2024-12-10",
             horaEntrega = "14:00",
-            componentes = listOf(componente1.nombre, componente2.nombre),
+            componentes = listOf("0", "1"),
             total = componente1.precio + componente2.precio,
             garantias = listOf("Garantía estándar", "Garantía extendida")
         )
