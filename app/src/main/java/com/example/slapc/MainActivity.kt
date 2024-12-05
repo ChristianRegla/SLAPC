@@ -1,5 +1,6 @@
 package com.example.slapc
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -16,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.ui.NavigationUI
 import com.example.slapc.databinding.ActivityMainBinding
+import com.example.slapc.ui.carrito.Carrito
 
 class MainActivity : AppCompatActivity() {
 
@@ -47,6 +49,7 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
         NavigationUI.setupWithNavController(navView, navController)
 
+        eliminarRegistroDeSesion()
         configurarMenu()
 
         navView.setNavigationItemSelectedListener { menuItem ->
@@ -96,6 +99,13 @@ class MainActivity : AppCompatActivity() {
             configurarMenu()
             // Actualizamos el nav header a usuario no registrado porque se cerró sesión
             actualizarNavHeader(null, null)
+
+            // Se reinicia el carrito de compras
+            Carrito.reiniciar()
+
+            // Se eliminan shared preferences de la sesión cerrada
+            eliminarRegistroDeSesion()
+
             // Cerramos el menú
             drawerLayout.closeDrawers()
         } catch (e: Exception) {
@@ -103,6 +113,13 @@ class MainActivity : AppCompatActivity() {
             Log.e("ERROR", "Error en cerrarSesion: ${e.message}")
         }
 
+    }
+
+    private fun eliminarRegistroDeSesion() {
+        val sharedPreferences = getSharedPreferences("slapc.prefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.commit()
     }
 
     // Estoes para actualizar el nav header con los datos del usuario que inició sesión

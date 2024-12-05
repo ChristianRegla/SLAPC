@@ -65,11 +65,8 @@ object Carrito {
 
     fun reiniciar() {
         items.clear()
-        garantias.clear()
-        subtotal = 0.0
-        costoGarantias = 0.0
-        iva = 0.0
-        total = 0.0
+        recalcularAcumulados()
+        onItemEliminado?.invoke()
     }
 
     private fun recalcularAcumulados() {

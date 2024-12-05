@@ -1,6 +1,7 @@
 // CatalogoFragment.kt
 package com.example.slapc.ui.catalogo
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,14 +10,18 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.SearchView
 import android.widget.Spinner
+import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.slapc.databinding.FragmentCatalogoBinding
 import com.example.slapc.CategoriaComponente
 import com.example.slapc.Componente
+import com.example.slapc.R
 import com.example.slapc.RepositorioComponentes
-
 
 class CatalogoFragment : Fragment() {
 
@@ -25,6 +30,9 @@ class CatalogoFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var spinner: Spinner
     private lateinit var searchView: SearchView
+    private val activityWithResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        result: ActivityResult -> interpretarResultadoDeDetalles(result)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +57,7 @@ class CatalogoFragment : Fragment() {
         // Para el caso de los filtros por categoría, la funcionalidad que ya se vió que está debajo debería funcionar
         // correctamente sin necesitar un view model que pudiera reintroducir problemas.
 
-        adapter = ProductoAdapter(productos) // Usa la lista inicializada vacía
+        adapter = ProductoAdapter(productos, activityWithResultLauncher) // Usa la lista inicializada vacía
         recyclerView.layoutManager = GridLayoutManager(context, 2)
         recyclerView.adapter = adapter
 
@@ -65,7 +73,6 @@ class CatalogoFragment : Fragment() {
                 return true
             }
         })
-
 
         // Configurar el Spinner
         spinner = binding.spinnerCategorias
@@ -92,13 +99,27 @@ class CatalogoFragment : Fragment() {
         } else {
             productos.filter { Componente.obtenerNombreDeCategoria(it.categoria) == categoria }
         }
-        adapter = ProductoAdapter(filteredList)
+        adapter = ProductoAdapter(filteredList, activityWithResultLauncher)
         recyclerView.adapter = adapter
     }
     private fun filtrarProductos(query: String?) {
         val filteredList = productos.filter { it.nombre.contains(query ?: "", ignoreCase = true) }
-        adapter = ProductoAdapter(filteredList)
+        adapter = ProductoAdapter(filteredList, activityWithResultLauncher)
         recyclerView.adapter = adapter
     }
 
+    private fun interpretarResultadoDeDetalles(resultado: ActivityResult) {
+        if(resultado.resultCode == Activity.RESULT_OK) {
+            val intent = resultado.data
+            val agregadoAlCarrito = intent!!.getBooleanExtra("agregado_al_carrito", false)
+
+            if (agregadoAlCarrito) {
+                Toast.makeText(context, "Componente agregado al carrito", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                findNavController().navigate(R.id.nav_login)
+                Toast.makeText(context, "Inicie sesión para usar el carrito", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 }

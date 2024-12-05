@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -53,27 +54,6 @@ class CarritoFragment : Fragment() {
         txtIVA = binding.txtCarritoIVA
         txtTotal = binding.txtCarritoTotal
         btnComprar = binding.btnCarritoComprar
-
-        // Codigo de testing
-        RepositorioComponentes.agregarComponente(Componente(
-            "supermouse",
-            "facebook",
-            99.99,
-            CategoriaComponente.MOUSE,
-            "Es un gran mouse"
-        ))
-        RepositorioArmados.agregarArmado(Armado(
-            0,
-            "armadoTest",
-            20.0,
-            "Gaming",
-            "Un armado de pruebas",
-            listOf(RepositorioComponentes.obtenerComponente(0)!!),
-            0.0
-        ))
-
-        Carrito.agregarItem(ComponenteEnCarrito(0, 5))
-        Carrito.agregarItem(ArmadoEnCarrito(0, 3))
 
         // Muestra inicial de items de carrito.
         val recyclerView = binding.rclCarritoItems
@@ -143,8 +123,7 @@ class CarritoFragment : Fragment() {
         // Vaciar listado del carrito
         Carrito.reiniciar()
 
-        // TODO: Cambiar navegación a la ventana de pedidos
-        findNavController().navigate(R.id.nav_catalogo)
+        Toast.makeText(context, "Pedido generado con el carrito", Toast.LENGTH_SHORT).show()
     }
 
     private fun dosCifrasDe(numero: Int): String {
