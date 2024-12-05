@@ -69,6 +69,8 @@
     <string name="borrar">Borrar</string>
     <string name="buscar">Buscar</string>
 
+    <string name="agregar_al_carrito">Agregar al carrito</string>
+
     
     <string-array name="categorias_componentes">
         <item>CPU</item>
