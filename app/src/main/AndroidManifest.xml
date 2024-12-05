@@ -4,6 +4,7 @@
 
     <application
         android:allowBackup="true"
+        android:enableOnBackInvokedCallback="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -14,6 +15,13 @@
         <activity
             android:name=".CRUDComponentesActivity"
             android:exported="false" />
+        <activity
+            android:name=".ArmadosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.detalles.ProductoDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SLAPC"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -30,4 +30,8 @@ object RepositorioComponentes {
     fun quitarComponente(id: Int) {
         catalogoComponentes.removeIf { c -> c.id == id }
     }
+
+    fun obtenerComponentes(): List<Componente> {
+        return catalogoComponentes
+    }
 }

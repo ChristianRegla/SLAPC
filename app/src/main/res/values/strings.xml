@@ -2,16 +2,34 @@
     <string name="app_name">SLAPC</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Usuario no registrado</string>
+    <string name="nav_header_subtitle"></string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
     <string name="menu_home">Inicio de sesión</string>
     <string name="menu_gallery">Registro</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_admin">Menú del administrador</string>
     <string name="iniciar_sesion">Iniciar Sesión</string>
     <string name="menu_carrito">Carrito</string>
+    <string name="agregar_armado">Agregar armado</string>
+    <string name="salir_admin">Salir de administrador</string>
+
+    <string name="default_category_label">Categoría del armado</string>
+    <string-array name="categories">
+        <item>Categoría del armado</item>  <!-- Esta es la opción predeterminada no seleccionable, no cambiar sin tomar eso en cuenta jdfns -->
+        <item>Gaming</item>
+        <item>Oficina</item>
+        <item>Doméstico</item>
+    </string-array>
+
+    <string name="select_motherboard">Seleccione placa madre</string>
+    <string name="select_power_supply">Seleccione fuente de poder</string>
+    <string name="select_ram">Seleccione memoria RAM</string>
+    <string name="select_storage">Seleccione almacenamiento</string>
+    <string name="select_processor">Seleccione procesador</string>
+    <string name="select_cabinet">Seleccione gabinete</string>
+    <string name="select_graphics_card">Seleccione tarjeta gráfica</string>
 
     <string name="aceptar">Aceptar</string>
     <string name="cancelar">Cancelar</string>
@@ -32,12 +50,37 @@
     <string name="subtotal">Subtotal</string>
     <string name="total">Total</string>
 
+
+    <string name="crear_armado">Creando un armado</string>"
+    <string name="nombre_armado">Nombre del armado</string>
+    <string name="descuento">Descuento (%)</string>
+    <string name="descripcion">Descripción</string>
+    <string name="placa_madre">Placa madre</string>
+    <string name="fuente_poder">Fuente de poder</string>
+    <string name="RAM">RAM</string>
+    <string name="almacenamiento">Almacenamiento</string>
+    <string name="procesador">Procesador</string>
+    <string name="gabinete">Gabinete</string>
+    <string name="tarjeta_grafica">Tarjeta gráfica (opcional)</string>
+
+    <string name="agregar">Agregar</string>
+    <string name="borrar">Borrar</string>
+    <string name="buscar">Buscar</string>
+
+    
     <string-array name="categorias_componentes">
         <item>CPU</item>
-        <item>Disco duro</item>
+        <item>Almacenamiento</item>
         <item>Monitor</item>
         <item>Mouse</item>
         <item>Teclado</item>
         <item>RAM</item>
+        <item>Fuente de Poder</item>
+        <item>Gabinete</item>
+        <item>Tarjeta Gráfica</item>
+        <item>Placa Madre</item>
     </string-array>
+
+
+    <string name="catalogo_prin">Catálogo de productos</string>
 </resources>

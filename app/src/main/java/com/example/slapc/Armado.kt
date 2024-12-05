@@ -1,11 +1,17 @@
 package com.example.slapc
 
-// TODO: Cambiar stub por clase real
-class Armado {
-    var nombre: String = "Algun armado"
-    var descuento: Int = 50
-
+data class Armado(
+    val id: Int,
+    var nombre: String,
+    var descuento: Double,
+    var categoria: String,
+    var descripcion: String,
+    var componentes: List<Componente>,
+    var precio: Double
+) {
     fun obtenerPrecio(): Double {
-        return 999.99 * descuento / 100
+        precioAcumulado: Double = 0.0
+        componentes.foreach({ c -> precioAcumulado += c.precio })
+        return precioAcumulado * (100 - descuento) / 100
     }
 }
