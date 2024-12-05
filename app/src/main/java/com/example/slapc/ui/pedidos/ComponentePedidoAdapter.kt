@@ -22,7 +22,7 @@ class ComponentePedidoAdapter(private val productosPedidos: List<componentePedid
     inner class ProductoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imgProducto: ImageView = itemView.findViewById(R.id.imgProducto)
         val tvNombre: TextView = itemView.findViewById(R.id.tvNombre)
-        val tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
+        val tvPrecio: TextView = itemView.findViewById(R.id.tvPrecio)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductoViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_producto, parent, false)
@@ -41,7 +41,7 @@ class ComponentePedidoAdapter(private val productosPedidos: List<componentePedid
         }
 
         holder.tvNombre.text = productoped.nombre
-        holder.tvDescription.text = productoped.detallesTecnicos
+        holder.tvPrecio.text = "$" + productoped.precio.toString()
 
         // Configuración del click listener
         holder.itemView.setOnClickListener {
@@ -74,7 +74,7 @@ class ComponentePedidoAdapter(private val productosPedidos: List<componentePedid
         inner class ProductoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val imgProducto: ImageView = itemView.findViewById(R.id.imgProducto)
             val tvNombre: TextView = itemView.findViewById(R.id.tvNombre)
-            val tvDescripcion: TextView = itemView.findViewById(R.id.tvDescription)
+            val tvDescripcion: TextView = itemView.findViewById(R.id.tvPrecio)
         }
 
         override fun onPostExecute(result: Bitmap?) {

@@ -85,5 +85,6 @@
 
     <string name="catalogo_prin">Catálogo de productos</string>
     <string name="pedidos_prin">Mis Pedidos</string>
+    <string name="agregar_al_carrito"></string>
     
 </resources>
