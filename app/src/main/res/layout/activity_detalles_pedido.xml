@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
@@ -39,13 +40,12 @@
 
     <TextView
         android:id="@+id/text_direccion"
-        android:layout_width="377dp"
-        android:layout_height="41dp"
-        android:layout_marginBottom="4dp"
+        android:layout_width="345dp"
+        android:layout_height="33dp"
+        android:layout_marginBottom="12dp"
         android:hint="Dirección de envío y horario de entrega"
         app:layout_constraintBottom_toTopOf="@id/text_total_pagar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView

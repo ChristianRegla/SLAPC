@@ -16,7 +16,7 @@ class PedidoAdapter(
     class PedidoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val numeroPedido: TextView = view.findViewById(R.id.text_numero_pedido)
         val fechaEntrega: TextView = view.findViewById(R.id.text_fecha_entrega)
-        val precio: TextView = view.findViewById(R.id.text_precio)
+        val precioTotal: TextView = view.findViewById(R.id.text_precio)
         val botonDetalles: Button = view.findViewById(R.id.button_ver_detalles)
     }
 
@@ -29,8 +29,8 @@ class PedidoAdapter(
     override fun onBindViewHolder(holder: PedidoViewHolder, position: Int) {
         val pedido = pedidos[position]
         holder.numeroPedido.text = "No. de Pedido: ${pedido.id}"
-        holder.fechaEntrega.text = "Fecha: ${pedido.fechaEntrega}"
-        holder.precio.text = "Precio: $${pedido.precio}"
+        holder.fechaEntrega.text = "Fecha de Entrega: ${pedido.fechaEntrega} a las ${pedido.horaEntrega}"
+        holder.precioTotal.text = "Total: $${pedido.total}"
         holder.botonDetalles.setOnClickListener { onClick(pedido) }
     }
 

@@ -21,8 +21,6 @@
     <color name="text_secondary">#00ADB5</color>
 
     <color name="primaryColor">#4CAF50</color> <!-- Verde llamativo -->
-    <color name="black" tools:ignore="DuplicateDefinition">#212121</color>
-    <color name="white" tools:ignore="DuplicateDefinition">#FFFFFF</color>
 
 
 </resources>
