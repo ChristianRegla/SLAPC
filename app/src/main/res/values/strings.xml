@@ -69,9 +69,6 @@
     <string name="borrar">Borrar</string>
     <string name="buscar">Buscar</string>
 
-    <string name="agregar_al_carrito">Agregar al carrito</string>
-
-    
     <string-array name="categorias_componentes">
         <item>CPU</item>
         <item>Almacenamiento</item>
@@ -87,4 +84,6 @@
 
 
     <string name="catalogo_prin">Catálogo de productos</string>
+    <string name="pedidos_prin">Mis Pedidos</string>
+    
 </resources>
