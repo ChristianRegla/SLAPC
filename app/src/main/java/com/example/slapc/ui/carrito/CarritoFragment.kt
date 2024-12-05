@@ -1,6 +1,5 @@
 package com.example.slapc.ui.carrito
 
-import android.content.DialogInterface
 import android.icu.util.TimeZone
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,15 +11,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.slapc.Armado
-import com.example.slapc.CategoriaComponente
-import com.example.slapc.Componente
 import com.example.slapc.Pedido
 import com.example.slapc.R
-import com.example.slapc.RepositorioArmados
-import com.example.slapc.RepositorioComponentes
 import com.example.slapc.RepositorioPedidos
 import com.example.slapc.databinding.FragmentCarritoBinding
 import com.example.slapc.ui.carrito.adaptador.ItemEnCarritoAdaptador
@@ -140,20 +133,42 @@ class CarritoFragment : Fragment() {
         val edtCantidad: EditText = dialogView.findViewById(R.id.edtCarritoCantidadEditada)
 
         // Construir dialogo
-        builder.setView(dialogView)
-        .setPositiveButton(R.string.aceptar, DialogInterface.OnClickListener {
-            dialog, id -> run {
-                val nuevoModelo = Carrito.cambiarCantidadDeItem(itemNum, edtCantidad.text.toString().toInt())
-                callbackRedibujo(nuevoModelo)
-                dialog.dismiss()
+        val dialog = builder.setView(dialogView)
+            .setPositiveButton(R.string.aceptar, null)
+            .setNegativeButton(R.string.cancelar, null)
+            .create()
+
+        // Configurar listeners de botones evitando comportamiento por defecto.
+        dialog.setOnShowListener { dialogInterface -> run {
+            val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+            val negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+
+            // Configurar botón Aceptar con validación de la cantidad.
+            positiveButton.setOnClickListener {
+                if(edtCantidad.text.isEmpty() || edtCantidad.text.isBlank()) {
+                    Toast.makeText(context, "Ingrese una cantidad para actualizar", Toast.LENGTH_SHORT).show()
+                }
+                else {
+                    val cantidad = edtCantidad.text.toString().toInt()
+
+                    if (cantidad == 0) {
+                        Toast.makeText(context, "Ingrese una cantidad mayor a 0 para actualizar", Toast.LENGTH_SHORT).show()
+                    }
+                    else {
+                        val nuevoModelo = Carrito.cambiarCantidadDeItem(itemNum, edtCantidad.text.toString().toInt())
+                        callbackRedibujo(nuevoModelo)
+                        dialog.dismiss()
+                    }
+                }
             }
-        })
-        .setNegativeButton(R.string.cancelar, DialogInterface.OnClickListener {
-            dialog, id -> dialog.cancel()
-        })
+
+            negativeButton.setOnClickListener {
+                dialog.cancel()
+            }
+        }}
 
         // Mostrar dialogo
-        builder.create().show()
+        dialog.show()
     }
 
     override fun onDestroyView() {
