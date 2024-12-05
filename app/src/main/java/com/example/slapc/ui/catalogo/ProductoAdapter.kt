@@ -21,7 +21,7 @@ class ProductoAdapter(private val productos: List<Componente>) : RecyclerView.Ad
     inner class ProductoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imgProducto: ImageView = itemView.findViewById(R.id.imgProducto)
         val tvNombre: TextView = itemView.findViewById(R.id.tvNombre)
-        val tvPrecio: TextView = itemView.findViewById(R.id.tvPrecio)
+        val tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductoViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_producto, parent, false)
@@ -40,7 +40,7 @@ class ProductoAdapter(private val productos: List<Componente>) : RecyclerView.Ad
         }
 
         holder.tvNombre.text = producto.nombre
-        holder.tvPrecio.text = "$" + producto.precio.toString()
+        holder.tvDescription.text = producto.detallesTecnicos
 
         // Configuración del click listener
         holder.itemView.setOnClickListener {
@@ -55,6 +55,7 @@ class ProductoAdapter(private val productos: List<Componente>) : RecyclerView.Ad
             context.startActivity(intent)
         }
     }
+
 
     private class LoadImageTask(val imageView: ImageView) : AsyncTask<String, Void, Bitmap?>() {
         override fun doInBackground(vararg params: String?): Bitmap? {
@@ -72,7 +73,7 @@ class ProductoAdapter(private val productos: List<Componente>) : RecyclerView.Ad
         inner class ProductoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val imgProducto: ImageView = itemView.findViewById(R.id.imgProducto)
             val tvNombre: TextView = itemView.findViewById(R.id.tvNombre)
-            val tvPrecio: TextView = itemView.findViewById(R.id.tvPrecio)
+            val tvDescripcion: TextView = itemView.findViewById(R.id.tvDescription)
         }
 
         override fun onPostExecute(result: Bitmap?) {
@@ -82,5 +83,7 @@ class ProductoAdapter(private val productos: List<Componente>) : RecyclerView.Ad
         }
     }
 
+
     override fun getItemCount(): Int = productos.size
+
 }

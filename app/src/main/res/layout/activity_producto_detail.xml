@@ -3,95 +3,93 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/background_dark"
+    android:padding="16dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="59dp"
+        android:background="@drawable/rounded_searchview_background"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Precio:"
+        android:textColor="@color/background_light" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="28dp"
-            android:gravity="center"
-            android:layout_above="@id/cardView">
+    <TextView
+        android:id="@+id/tvNombreDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:text="Nombre del Producto"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/imgProductoDetail"
-                android:layout_width="369dp"
-                android:layout_height="287dp"
-                android:layout_marginTop="10dp"
-                android:scaleType="centerCrop" />
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="208dp"
+        android:layout_marginTop="59dp"
+        android:background="@drawable/rounded_searchview_background"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Categoria:"
+        android:textColor="@color/background_light" />
 
-        </LinearLayout>
+    <TextView
+        android:id="@+id/tvPrecioDetail"
+        android:layout_width="97dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/tvNombreDetail"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="59dp"
+        android:background="@drawable/rounded_button"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Precio"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            app:cardCornerRadius="28dp"
-            android:layout_marginBottom="-20dp"
-            app:cardBackgroundColor="@color/background_dark"
-            android:id="@+id/cardView">
+    <TextView
+        android:id="@+id/tvCategoriaDetail"
+        android:layout_width="142dp"
+        android:layout_height="58dp"
+        android:layout_below="@id/tvNombreDetail"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="59dp"
+        android:layout_toEndOf="@id/tvPrecioDetail"
+        android:background="@drawable/rounded_button_teal"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Categoría"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="30dp">
+    <ImageView
+        android:id="@+id/imgProductoDetail"
+        android:layout_width="369dp"
+        android:layout_height="287dp"
+        android:layout_below="@id/tvCategoriaDetail"
+        android:layout_marginTop="26dp"
+        android:scaleType="centerCrop" />
 
-                <TextView
-                    android:id="@+id/tvNombreDetail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:text="Nombre del Producto"
-                    android:textColor="@color/white"
-                    android:textSize="30sp"
-                    android:padding="8dp"
-                    android:textStyle="bold"
-                    android:fontFamily="sans-serif-medium"/>
-
-                <TextView
-                    android:id="@+id/tvCategoriaDetail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="Categoría"
-                    android:textColor="@color/gray"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:id="@+id/tvPrecioDetail"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
-                    android:padding="8dp"
-                    android:text="Precio"
-                    android:textColor="@color/text_secondary"
-                    android:textStyle="bold"
-                    android:textSize="30sp" />
-
-                <TextView
-                    android:id="@+id/tvDetallesDetail"
-                    android:layout_width="match_parent"
-                    android:layout_height="107dp"
-                    android:layout_below="@id/imgProductoDetail"
-                    android:layout_marginTop="50dp"
-                    android:padding="8dp"
-                    android:background="@color/background_dark_variant"
-                    android:text="Detalles técnicos"
-                    android:textSize="20sp"
-                    android:textColor="@color/gray"
-                    android:fontFamily="sans-serif-medium"/>
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/tvDetallesDetail"
+        android:layout_width="387dp"
+        android:layout_height="107dp"
+        android:layout_below="@id/imgProductoDetail"
+        android:layout_marginTop="50dp"
+        android:background="@color/background_dark_variant"
+        android:text="Detalles técnicos"
+        android:textSize="16sp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddToCart"
@@ -104,8 +102,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
-        app:backgroundTint="@color/text_secondary"
-        app:srcCompat="@drawable/carrito"
-        android:contentDescription="@string/agregar_al_carrito"/>
+        app:backgroundTint="@color/teal_700"
+        app:srcCompat="@drawable/carrito" />
+
 
 </RelativeLayout>
