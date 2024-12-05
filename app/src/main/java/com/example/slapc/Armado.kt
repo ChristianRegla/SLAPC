@@ -10,8 +10,9 @@ data class Armado(
     var precio: Double
 ) {
     fun obtenerPrecio(): Double {
-        precioAcumulado: Double = 0.0
-        componentes.foreach({ c -> precioAcumulado += c.precio })
-        return precioAcumulado * (100 - descuento) / 100
+        var precioAcumulado: Double = 0.0
+        componentes.forEach { c -> precioAcumulado += c.precio }
+        precio = precioAcumulado * (100 - descuento) / 100
+        return precio
     }
 }

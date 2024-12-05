@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.nav_login,
                 R.id.nav_catalogo,
-                R.id.nav_carrito // TODO: Ocultar carrito si no hay sesión
+                R.id.nav_carrito
             ),
             drawerLayout
         )
@@ -65,21 +65,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Este sería el menú default, oculta el cerrar sesión y el menú del administrador
+    // y ahora también el carrito
     // dejando solo visible el login y por defecto el catálogo de productos siempre es visible
     private fun configurarMenu() {
         Log.d("DEBUG", "ID nav_login: ${R.id.nav_login}")
         val menu = navView.menu
         menu.findItem(R.id.nav_cerrar_sesion).isVisible = false
         menu.findItem(R.id.nav_admin_menu).isVisible = false
+        menu.findItem(R.id.nav_carrito).isVisible = false
         menu.findItem(R.id.nav_login).isVisible = true
     }
 
     // Cuando se inicia sesión se usa este, oculta la opción del login y muestra el cerrar sesión
+    // así como el carrito
     fun actualizarMenuParaCliente() {
         val menu = navView.menu
         menu.findItem(R.id.nav_login).isVisible = false
         menu.findItem(R.id.nav_cerrar_sesion).isVisible = true
         menu.findItem(R.id.nav_admin_menu).isVisible = false
+        menu.findItem(R.id.nav_carrito).isVisible = true
     }
 
     fun cerrarSesion() {

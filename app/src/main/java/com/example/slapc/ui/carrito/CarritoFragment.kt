@@ -13,10 +13,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.slapc.Armado
 import com.example.slapc.CategoriaComponente
 import com.example.slapc.Componente
 import com.example.slapc.Pedido
 import com.example.slapc.R
+import com.example.slapc.RepositorioArmados
 import com.example.slapc.RepositorioComponentes
 import com.example.slapc.RepositorioPedidos
 import com.example.slapc.databinding.FragmentCarritoBinding
@@ -60,6 +62,16 @@ class CarritoFragment : Fragment() {
             CategoriaComponente.MOUSE,
             "Es un gran mouse"
         ))
+        RepositorioArmados.agregarArmado(Armado(
+            0,
+            "armadoTest",
+            20.0,
+            "Gaming",
+            "Un armado de pruebas",
+            listOf(RepositorioComponentes.obtenerComponente(0)!!),
+            0.0
+        ))
+
         Carrito.agregarItem(ComponenteEnCarrito(0, 5))
         Carrito.agregarItem(ArmadoEnCarrito(0, 3))
 
@@ -132,7 +144,7 @@ class CarritoFragment : Fragment() {
         Carrito.reiniciar()
 
         // TODO: Cambiar navegación a la ventana de pedidos
-        findNavController().navigate(R.id.nav_home)
+        findNavController().navigate(R.id.nav_catalogo)
     }
 
     private fun dosCifrasDe(numero: Int): String {
