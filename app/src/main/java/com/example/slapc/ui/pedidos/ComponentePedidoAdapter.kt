@@ -1,4 +1,4 @@
-package com.example.slapc.ui.catalogo
+package com.example.slapc.ui.pedidos
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -12,11 +12,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.slapc.Componente
 import com.example.slapc.R
+import com.example.slapc.ui.pedidos.ComponentePedidoAdapter
 import com.example.slapc.ui.detalles.ProductoDetailActivity
 import java.net.HttpURLConnection
 import java.net.URL
 
-class ProductoAdapter(private val productos: List<Componente>) : RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder>() {
+class ComponentePedidoAdapter(private val productosPedidos: List<componentePedido>) : RecyclerView.Adapter<ComponentePedidoAdapter.ProductoViewHolder>() {
 
     inner class ProductoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imgProducto: ImageView = itemView.findViewById(R.id.imgProducto)
@@ -29,32 +30,33 @@ class ProductoAdapter(private val productos: List<Componente>) : RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: ProductoViewHolder, position: Int) {
-        val producto = productos[position]
+        val productoped = productosPedidos[position]
 
         // Si `reflimagen` es una URL (String), se carga la imagen de forma asincrónica.
-        if (producto.refImagen.isNotEmpty()) {
-            LoadImageTask(holder.imgProducto).execute(producto.refImagen)
+        if (productoped.refImagen.isNotEmpty()) {
+            LoadImageTask(holder.imgProducto).execute(productoped.refImagen)
         } else {
             // Si `reflimagen` está vacía o no es válida, se usa una imagen predeterminada.
             holder.imgProducto.setImageResource(R.drawable.ic_address)
         }
 
-        holder.tvNombre.text = producto.nombre
-        holder.tvPrecio.text = "$" + producto.precio.toString()
+        holder.tvNombre.text = productoped.nombre
+        holder.tvPrecio.text = "$" + productoped.precio.toString()
 
         // Configuración del click listener
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, ProductoDetailActivity::class.java)
-            intent.putExtra("id", producto.id)
-            intent.putExtra("nombre", producto.nombre)
-            intent.putExtra("reflimagen", producto.refImagen)
-            intent.putExtra("precio", producto.precio)
-            intent.putExtra("categoria", Componente.obtenerNombreDeCategoria(producto.categoria))
-            intent.putExtra("detallesTecnicos", producto.detallesTecnicos)
+            intent.putExtra("id", productoped.id)
+            intent.putExtra("nombre", productoped.nombre)
+            intent.putExtra("reflimagen", productoped.refImagen)
+            intent.putExtra("precio", productoped.precio)
+            intent.putExtra("categoria", Componente.obtenerNombreDeCategoria(productoped.categoria))
+            intent.putExtra("detallesTecnicos", productoped.detallesTecnicos)
             context.startActivity(intent)
         }
     }
+
 
     private class LoadImageTask(val imageView: ImageView) : AsyncTask<String, Void, Bitmap?>() {
         override fun doInBackground(vararg params: String?): Bitmap? {
@@ -72,7 +74,7 @@ class ProductoAdapter(private val productos: List<Componente>) : RecyclerView.Ad
         inner class ProductoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val imgProducto: ImageView = itemView.findViewById(R.id.imgProducto)
             val tvNombre: TextView = itemView.findViewById(R.id.tvNombre)
-            val tvPrecio: TextView = itemView.findViewById(R.id.tvPrecio)
+            val tvDescripcion: TextView = itemView.findViewById(R.id.tvPrecio)
         }
 
         override fun onPostExecute(result: Bitmap?) {
@@ -82,5 +84,7 @@ class ProductoAdapter(private val productos: List<Componente>) : RecyclerView.Ad
         }
     }
 
-    override fun getItemCount(): Int = productos.size
+
+    override fun getItemCount(): Int = productosPedidos.size
+
 }
