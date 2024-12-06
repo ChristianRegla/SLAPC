@@ -1,9 +1,9 @@
 package com.example.slapc.ui.catalogo
 
+import android.os.AsyncTask
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.os.AsyncTask
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +23,7 @@ class ProductoAdapter(private val productos: List<Componente>) : RecyclerView.Ad
         val tvNombre: TextView = itemView.findViewById(R.id.tvNombre)
         val tvPrecio: TextView = itemView.findViewById(R.id.tvPrecio)
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductoViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_producto, parent, false)
         return ProductoViewHolder(view)
@@ -31,16 +32,16 @@ class ProductoAdapter(private val productos: List<Componente>) : RecyclerView.Ad
     override fun onBindViewHolder(holder: ProductoViewHolder, position: Int) {
         val producto = productos[position]
 
-        // Si `reflimagen` es una URL (String), se carga la imagen de forma asincrónica.
-        if (producto.refImagen.isNotEmpty()) {
+        // Validar si `refImagen` es una URL válida
+        if (producto.refImagen.startsWith("http://") || producto.refImagen.startsWith("https://")) {
             LoadImageTask(holder.imgProducto).execute(producto.refImagen)
         } else {
-            // Si `reflimagen` está vacía o no es válida, se usa una imagen predeterminada.
-            holder.imgProducto.setImageResource(R.drawable.ic_address)
+            // Si `refImagen` no es una URL válida, usa una imagen predeterminada
+            holder.imgProducto.setImageResource(R.drawable.full_logo)
         }
 
         holder.tvNombre.text = producto.nombre
-        holder.tvPrecio.text = "$" + producto.precio.toString()
+        holder.tvPrecio.text = "$${producto.precio}"
 
         // Configuración del click listener
         holder.itemView.setOnClickListener {
@@ -69,15 +70,12 @@ class ProductoAdapter(private val productos: List<Componente>) : RecyclerView.Ad
                 null
             }
         }
-        inner class ProductoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val imgProducto: ImageView = itemView.findViewById(R.id.imgProducto)
-            val tvNombre: TextView = itemView.findViewById(R.id.tvNombre)
-            val tvPrecio: TextView = itemView.findViewById(R.id.tvPrecio)
-        }
 
         override fun onPostExecute(result: Bitmap?) {
             result?.let {
                 imageView.setImageBitmap(it)
+            } ?: run {
+                imageView.setImageResource(R.drawable.full_logo) // Imagen predeterminada en caso de error
             }
         }
     }

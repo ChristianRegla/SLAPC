@@ -1,12 +1,16 @@
 package com.example.slapc.ui.detalles
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.slapc.R
-import com.example.slapc.Componente
+import java.net.HttpURLConnection
+import java.net.URL
 
 class ProductoDetailActivity : AppCompatActivity() {
 
@@ -23,7 +27,10 @@ class ProductoDetailActivity : AppCompatActivity() {
         val detallesTecnicos = intent.getStringExtra("detallesTecnicos")
 
         // Log para verificar los datos recibidos
-        Log.d("ProductoDetailActivity", "ID: $id, Nombre: $nombre, Imagen: $reflimagen, Precio: $precio, Categoría: $categoria, Detalles: $detallesTecnicos")
+        Log.d(
+            "ProductoDetailActivity",
+            "ID: $id, Nombre: $nombre, Imagen: $reflimagen, Precio: $precio, Categoría: $categoria, Detalles: $detallesTecnicos"
+        )
 
         // Vista
         val imgProducto: ImageView = findViewById(R.id.imgProductoDetail)
@@ -33,15 +40,39 @@ class ProductoDetailActivity : AppCompatActivity() {
         val tvDetalles: TextView = findViewById(R.id.tvDetallesDetail)
 
         // Configurar vista con datos
-        if (reflimagen?.matches("\\d+".toRegex()) == true) {
-            imgProducto.setImageResource(reflimagen.toInt())
+        if (reflimagen != null && (reflimagen.startsWith("http://") || reflimagen.startsWith("https://"))) {
+            LoadImageTask(imgProducto).execute(reflimagen)
         } else {
             Log.e("ProductoDetailActivity", "Referencia de imagen no válida: $reflimagen")
+            imgProducto.setImageResource(R.drawable.full_logo) // Imagen predeterminada
         }
 
         tvNombre.text = nombre ?: "Nombre no disponible"
         tvPrecio.text = "$$precio"
-        tvCategoria.text = categoria
+        tvCategoria.text = categoria ?: "Categoría no disponible"
         tvDetalles.text = detallesTecnicos ?: "Detalles técnicos no disponibles"
+    }
+
+    private class LoadImageTask(private val imageView: ImageView) : AsyncTask<String, Void, Bitmap?>() {
+        override fun doInBackground(vararg params: String?): Bitmap? {
+            return try {
+                val url = URL(params[0])
+                val connection = url.openConnection() as HttpURLConnection
+                connection.inputStream.use {
+                    BitmapFactory.decodeStream(it)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                null
+            }
+        }
+
+        override fun onPostExecute(result: Bitmap?) {
+            if (result != null) {
+                imageView.setImageBitmap(result)
+            } else {
+                imageView.setImageResource(R.drawable.full_logo) // Imagen predeterminada en caso de error
+            }
+        }
     }
 }
