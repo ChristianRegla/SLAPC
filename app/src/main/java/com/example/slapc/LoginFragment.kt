@@ -87,6 +87,7 @@ class LoginFragment : Fragment() {
             if (usuario.esAdmin) {
                 findNavController().navigate(R.id.nav_admin_menu)
             } else {
+                registrarSesion()
                 (activity as MainActivity).actualizarMenuParaCliente()
                 findNavController().navigate(R.id.nav_catalogo)
             }
@@ -94,5 +95,12 @@ class LoginFragment : Fragment() {
         else {
             Toast.makeText(requireContext(), "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun registrarSesion() {
+        val sharedPreferences = requireActivity().getSharedPreferences("slapc.prefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("sesion_iniciada", true)
+        editor.commit()
     }
 }

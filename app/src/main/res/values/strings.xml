@@ -28,6 +28,7 @@
     <string name="menu_gallery">Registro</string>
     <string name="menu_admin">Menú del administrador</string>
     <string name="iniciar_sesion">Iniciar Sesión</string>
+    <string name="menu_carrito">Carrito</string>
     <string name="agregar_armado">Agregar armado</string>
     <string name="salir_admin">Salir de administrador</string>
 
@@ -47,13 +48,25 @@
     <string name="select_cabinet">Seleccione gabinete</string>
     <string name="select_graphics_card">Seleccione tarjeta gráfica</string>
 
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="cantidad">Cantidad</string>
     <string name="categoria">Categoría</string>
     <string name="detalles_tecnicos">Detalles técnicos</string>
+    <string name="editar_cantidad">Editar cantidad</string>
+    <string name="garantias">Garantías</string>
+    <string name="garantia_activada">Garantía activada</string>
+    <string name="garantia_desactivada">Garantía desactivada</string>
     <string name="imagen">Imagen</string>
+    <string name="iva">IVA</string>
     <string name="nombre">Nombre</string>
     <string name="panel_componentes">Panel de componentes</string>
     <string name="precio">Precio</string>
+    <string name="realizar_compra">Realizar compra</string>
     <string name="salir">Salir</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="total">Total</string>
+
 
     <string name="crear_armado">Creando un armado</string>"
     <string name="nombre_armado">Nombre del armado</string>

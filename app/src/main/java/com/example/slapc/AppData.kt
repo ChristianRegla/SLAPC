@@ -9,5 +9,13 @@ val usuarios = mutableListOf(
         horaInicio = "00:00",
         horaFin = "00:00",
         esAdmin = true
+    ),
+    Usuario(
+        nombre = "usuario pruebas",
+        correo = "test@example.com",
+        contraseña = "12345",
+        direccionEntrega = "laboratorio de pruebas",
+        horarioEntrega = "24/7",
+        esAdmin = false
     )
 )
