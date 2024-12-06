@@ -1,11 +1,14 @@
 package com.example.slapc.ui.detalles
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.os.AsyncTask
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import com.example.slapc.ui.carrito.Carrito
+import com.example.slapc.ui.carrito.ComponenteEnCarrito
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
@@ -14,10 +17,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.slapc.R
 import java.net.HttpURLConnection
 import java.net.URL
-import com.example.slapc.Componente
-import com.example.slapc.ui.carrito.Carrito
-import com.example.slapc.ui.carrito.ComponenteEnCarrito
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ProductoDetailActivity : AppCompatActivity() {
 
@@ -32,6 +31,7 @@ class ProductoDetailActivity : AppCompatActivity() {
         val precio = intent.getDoubleExtra("precio", 0.0)
         val categoria = intent.getStringExtra("categoria")
         val detallesTecnicos = intent.getStringExtra("detallesTecnicos")
+        val fabAddToCart: FloatingActionButton = findViewById(R.id.fabAddToCart)
 
         // Log para verificar los datos recibidos
         Log.d(
@@ -45,13 +45,23 @@ class ProductoDetailActivity : AppCompatActivity() {
         val tvPrecio: TextView = findViewById(R.id.tvPrecioDetail)
         val tvCategoria: TextView = findViewById(R.id.tvCategoriaDetail)
         val tvDetalles: TextView = findViewById(R.id.tvDetallesDetail)
-        val fabAddToCart: FloatingActionButton = findViewById(R.id.fabAddToCart)
 
         // Configurar vista con datos
-        if (reflimagen != null && (reflimagen.startsWith("http://") || reflimagen.startsWith("https://"))) {
-            LoadImageTask(imgProducto).execute(reflimagen)
+        if (reflimagen != null) {
+            if (reflimagen.startsWith("http://") || reflimagen.startsWith("https://")) {
+                // Cargar imagen desde URL
+                LoadImageTask(imgProducto).execute(reflimagen)
+            } else {
+                // Intentar cargar desde recursos del drawable
+                val resId = resources.getIdentifier(reflimagen, "drawable", packageName)
+                if (resId != 0) {
+                    imgProducto.setImageResource(resId)
+                } else {
+                    Log.e("ProductoDetailActivity", "Referencia de imagen no válida: $reflimagen")
+                    imgProducto.setImageResource(R.drawable.full_logo) // Imagen predeterminada
+                }
+            }
         } else {
-            Log.e("ProductoDetailActivity", "Referencia de imagen no válida: $reflimagen")
             imgProducto.setImageResource(R.drawable.full_logo) // Imagen predeterminada
         }
 

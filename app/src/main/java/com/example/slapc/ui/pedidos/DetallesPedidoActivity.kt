@@ -36,8 +36,8 @@ class DetallesPedidoActivity : AppCompatActivity() {
 
         if (pedido != null) {
             val componentes = pedido.componentes.mapNotNull { idString ->
-                val id = idString.toIntOrNull() ?: return@mapNotNull null
-                RepositorioComponentesPedidos.obtenerComponente(id)
+                val nombre = idString.takeIf { it.isNotEmpty() } ?: return@mapNotNull null
+                RepositorioComponentesPedidos.obtenerComponente(nombre)
             }
 
             Log.d("DetallesPedidoActivity", "Componentes cargados: ${componentes.size}")

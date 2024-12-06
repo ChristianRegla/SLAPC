@@ -12,9 +12,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.slapc.Pedido
+import com.example.slapc.ui.pedidos.Pedido
 import com.example.slapc.R
-import com.example.slapc.RepositorioPedidos
+import com.example.slapc.ui.pedidos.RepositorioPedidos
 import com.example.slapc.databinding.FragmentCarritoBinding
 import com.example.slapc.ui.carrito.adaptador.ItemEnCarritoAdaptador
 import java.util.Calendar
@@ -103,7 +103,8 @@ class CarritoFragment : Fragment() {
         val fechaEntrega = "$diaEntrega/$mesEntrega/$anioEntrega"
 
         // Crear pedido
-        RepositorioPedidos.agregarPedido(Pedido(
+        RepositorioPedidos.agregarPedido(
+            Pedido(
             identificador,
             fechaCompra,
             fechaEntrega,
