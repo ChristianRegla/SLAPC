@@ -3,6 +3,9 @@ package com.example.slapc.ui.detalles
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.AsyncTask
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
@@ -11,6 +14,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.slapc.R
 import java.net.HttpURLConnection
 import java.net.URL
+import com.example.slapc.Componente
+import com.example.slapc.ui.carrito.Carrito
+import com.example.slapc.ui.carrito.ComponenteEnCarrito
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ProductoDetailActivity : AppCompatActivity() {
 
@@ -38,6 +45,7 @@ class ProductoDetailActivity : AppCompatActivity() {
         val tvPrecio: TextView = findViewById(R.id.tvPrecioDetail)
         val tvCategoria: TextView = findViewById(R.id.tvCategoriaDetail)
         val tvDetalles: TextView = findViewById(R.id.tvDetallesDetail)
+        val fabAddToCart: FloatingActionButton = findViewById(R.id.fabAddToCart)
 
         // Configurar vista con datos
         if (reflimagen != null && (reflimagen.startsWith("http://") || reflimagen.startsWith("https://"))) {
@@ -51,6 +59,22 @@ class ProductoDetailActivity : AppCompatActivity() {
         tvPrecio.text = "$$precio"
         tvCategoria.text = categoria ?: "Categoría no disponible"
         tvDetalles.text = detallesTecnicos ?: "Detalles técnicos no disponibles"
+
+        fabAddToCart.setOnClickListener { validarSesionParaCompra(id) }
+    }
+
+    private fun validarSesionParaCompra(idComponente: Int) {
+        val sharedPreferences = getSharedPreferences("slapc.prefs", Context.MODE_PRIVATE)
+        val sesionIniciada = sharedPreferences.getBoolean("sesion_iniciada", false)
+
+        if (sesionIniciada) {
+            Carrito.agregarItem(ComponenteEnCarrito(idComponente, 1))
+        }
+
+        val intent = Intent()
+        intent.putExtra("agregado_al_carrito", sesionIniciada)
+        setResult(Activity.RESULT_OK, intent)
+        finish()
     }
 
     private class LoadImageTask(private val imageView: ImageView) : AsyncTask<String, Void, Bitmap?>() {

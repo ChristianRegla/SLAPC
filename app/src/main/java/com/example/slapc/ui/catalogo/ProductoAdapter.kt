@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
 import androidx.recyclerview.widget.RecyclerView
 import com.example.slapc.Componente
 import com.example.slapc.R
@@ -16,7 +17,10 @@ import com.example.slapc.ui.detalles.ProductoDetailActivity
 import java.net.HttpURLConnection
 import java.net.URL
 
-class ProductoAdapter(private val productos: List<Componente>) : RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder>() {
+class ProductoAdapter(
+    private val productos: List<Componente>,
+    private val activityWithResultLauncher: ActivityResultLauncher<Intent>
+) : RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder>() {
 
     inner class ProductoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imgProducto: ImageView = itemView.findViewById(R.id.imgProducto)
@@ -53,7 +57,8 @@ class ProductoAdapter(private val productos: List<Componente>) : RecyclerView.Ad
             intent.putExtra("precio", producto.precio)
             intent.putExtra("categoria", Componente.obtenerNombreDeCategoria(producto.categoria))
             intent.putExtra("detallesTecnicos", producto.detallesTecnicos)
-            context.startActivity(intent)
+
+            activityWithResultLauncher.launch(intent)
         }
     }
 
