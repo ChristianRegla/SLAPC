@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.slapc.Componente
 import com.example.slapc.R
+import com.example.slapc.ui.carrito.ItemEnCarrito
 import com.example.slapc.ui.pedidos.RepositorioPedidos
 import com.example.slapc.ui.catalogo.ProductoAdapter
 import com.example.slapc.RepositorioComponentes
@@ -29,26 +30,32 @@ class DetallesPedidoActivity : AppCompatActivity() {
         textTotalPagar = findViewById(R.id.text_total_pagar)
         buttonSalir = findViewById(R.id.button_salir)
 
-        recyclerViewProductos.layoutManager = GridLayoutManager(this, 2)
+        recyclerViewProductos.layoutManager = LinearLayoutManager(this)
 
         val pedidoId = intent.getStringExtra("pedido_id")
         val pedido = RepositorioPedidos.buscarPedidoPorId(pedidoId ?: "")
 
         if (pedido != null) {
-            val componentes = pedido.componentes.mapNotNull { idString ->
-                val nombre = idString.takeIf { it.isNotEmpty() } ?: return@mapNotNull null
-                RepositorioComponentesPedidos.obtenerComponente(nombre)
+            val componentesConCantidad = pedido.componentes.mapNotNull { componente ->
+                try {
+                    val (nombre, cantidad) = componente.split(" x ")
+                    componentePedido(nombre, cantidad.toInt())
+                } catch (e: Exception) {
+                    Log.e("DetallesPedidoActivity", "Error al procesar componente: $componente", e)
+                    null
+                }
             }
 
-            Log.d("DetallesPedidoActivity", "Componentes cargados: ${componentes.size}")
-            recyclerViewProductos.adapter = ComponentePedidoAdapter(componentes)
+            recyclerViewProductos.adapter = ComponentePedidoAdapter(componentesConCantidad)
 
             textDireccion.text = "Entrega en: ${pedido.fechaEntrega} a las ${pedido.horaEntrega}"
             textTotalPagar.text = "Total a pagar: $${pedido.total}"
         }
 
+
         buttonSalir.setOnClickListener {
             finish()
         }
     }
+
 }

@@ -1,12 +1,10 @@
 package com.example.slapc.ui.pedidos
 import com.example.slapc.CategoriaComponente
+import com.example.slapc.ui.carrito.ItemEnCarrito
 
 class componentePedido(
     var nombre: String,
-    var refImagen: String,
-    var precio: Double,
-    var categoria: CategoriaComponente,
-    var detallesTecnicos: String
+    var cantidad:Int
 ) {
     var id: Int = obtenerId()
 

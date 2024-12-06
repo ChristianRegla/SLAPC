@@ -6,9 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.slapc.R
-import com.example.slapc.ui.carrito.ItemEnCarrito
 
-class ComponentePedidoAdapter(private val itemsEnCarrito: List<ItemEnCarrito>) : RecyclerView.Adapter<ComponentePedidoAdapter.ProductoViewHolder>() {
+
+class ComponentePedidoAdapter(
+    private val componentes: List<componentePedido>
+) : RecyclerView.Adapter<ComponentePedidoAdapter.ProductoViewHolder>() {
 
     inner class ProductoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvNombre: TextView = itemView.findViewById(R.id.tvNombre)
@@ -21,11 +23,10 @@ class ComponentePedidoAdapter(private val itemsEnCarrito: List<ItemEnCarrito>) :
     }
 
     override fun onBindViewHolder(holder: ProductoViewHolder, position: Int) {
-        val itemEnCarrito = itemsEnCarrito[position]
-
-        holder.tvNombre.text = itemEnCarrito.obtenerNombre()
-        holder.tvCantidad.text = "Cantidad: ${itemEnCarrito.cantidad}"
+        val componente = componentes[position]
+        holder.tvNombre.text = componente.nombre
+        holder.tvCantidad.text = "Cantidad: ${componente.cantidad}"
     }
 
-    override fun getItemCount(): Int = itemsEnCarrito.size
+    override fun getItemCount(): Int = componentes.size
 }
