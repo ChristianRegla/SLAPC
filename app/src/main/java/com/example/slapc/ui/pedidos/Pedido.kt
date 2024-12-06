@@ -5,7 +5,7 @@ data class Pedido (
     val fechaCompra: String,
     val fechaEntrega: String,
     val horaEntrega: String,
-    val componentes: List<String>,
+    val detallesItems: List<String>,
     val total: Double,
     val garantias: List<String>
 )

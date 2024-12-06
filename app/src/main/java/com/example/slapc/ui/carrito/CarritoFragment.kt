@@ -77,7 +77,7 @@ class CarritoFragment : Fragment() {
 
     private fun comprarCarrito() {
         // Obtener datos preexistentes
-        val nombresItems = Carrito.copiarNombresComponentes()
+        val detallesItems = Carrito.generarDetallesDeItemParaPedido()
         val garantias = Carrito.copiarGarantias()
         val total = Carrito.total
 
@@ -103,13 +103,12 @@ class CarritoFragment : Fragment() {
         val fechaEntrega = "$diaEntrega/$mesEntrega/$anioEntrega"
 
         // Crear pedido
-        RepositorioPedidos.agregarPedido(
-            Pedido(
+        RepositorioPedidos.agregarPedido(Pedido(
             identificador,
             fechaCompra,
             fechaEntrega,
             horaEntrega,
-            nombresItems,
+            detallesItems,
             total,
             garantias
         ))

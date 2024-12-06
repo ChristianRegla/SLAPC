@@ -4,15 +4,9 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.slapc.Componente
 import com.example.slapc.R
-import com.example.slapc.ui.carrito.ItemEnCarrito
-import com.example.slapc.ui.pedidos.RepositorioPedidos
-import com.example.slapc.ui.catalogo.ProductoAdapter
-import com.example.slapc.RepositorioComponentes
 
 class DetallesPedidoActivity : AppCompatActivity() {
 
@@ -36,7 +30,7 @@ class DetallesPedidoActivity : AppCompatActivity() {
         val pedido = RepositorioPedidos.buscarPedidoPorId(pedidoId ?: "")
 
         if (pedido != null) {
-            val componentesConCantidad = pedido.componentes.mapNotNull { componente ->
+            val componentesConCantidad = pedido.detallesItems.mapNotNull { componente ->
                 try {
                     val (nombre, cantidad) = componente.split(" x ")
                     componentePedido(nombre, cantidad.toInt())

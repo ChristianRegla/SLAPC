@@ -53,8 +53,8 @@ object Carrito {
         onRecalculoDeAcumulados = null
     }
 
-    fun copiarNombresComponentes(): List<String> {
-        val nombres = items.map { item -> item.obtenerNombre() }
+    fun generarDetallesDeItemParaPedido(): List<String> {
+        val nombres = items.map { item -> "${item.obtenerNombre()} x ${item.cantidad}" }
         return nombres
     }
 
