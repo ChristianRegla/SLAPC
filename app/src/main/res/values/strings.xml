@@ -19,7 +19,9 @@
     <string name="correo">Correo</string>
     <string name="password">Contraseña</string>
     <string name="direccion_entrega">Dirección de entrega</string>
-    <string name="horario_entrega">Horario de entrega</string>
+    <string name="hora_inicio">Hora de inicio</string>
+    <string name="hora_fin">Hora de fin</string>
+    <string name="rango_entrega">Selecciona un rango de entrega:</string>
     <string name="registrarse">Registrarse</string>
 
     <string name="menu_home">Inicio de sesión</string>
