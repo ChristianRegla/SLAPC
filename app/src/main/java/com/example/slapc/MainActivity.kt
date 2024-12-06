@@ -1,5 +1,6 @@
 package com.example.slapc
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -16,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.ui.NavigationUI
 import com.example.slapc.databinding.ActivityMainBinding
+import com.example.slapc.ui.carrito.Carrito
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.nav_login,
                 R.id.nav_catalogo,
+                R.id.nav_carrito
             ),
             drawerLayout
         )
@@ -46,6 +49,7 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
         NavigationUI.setupWithNavController(navView, navController)
 
+        eliminarRegistroDeSesion()
         configurarMenu()
 
         navView.setNavigationItemSelectedListener { menuItem ->
@@ -64,21 +68,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Este sería el menú default, oculta el cerrar sesión y el menú del administrador
+    // y ahora también el carrito
     // dejando solo visible el login y por defecto el catálogo de productos siempre es visible
     private fun configurarMenu() {
         Log.d("DEBUG", "ID nav_login: ${R.id.nav_login}")
         val menu = navView.menu
         menu.findItem(R.id.nav_cerrar_sesion).isVisible = false
         menu.findItem(R.id.nav_admin_menu).isVisible = false
+        menu.findItem(R.id.nav_carrito).isVisible = false
         menu.findItem(R.id.nav_login).isVisible = true
     }
 
     // Cuando se inicia sesión se usa este, oculta la opción del login y muestra el cerrar sesión
+    // así como el carrito
     fun actualizarMenuParaCliente() {
         val menu = navView.menu
         menu.findItem(R.id.nav_login).isVisible = false
         menu.findItem(R.id.nav_cerrar_sesion).isVisible = true
         menu.findItem(R.id.nav_admin_menu).isVisible = false
+        menu.findItem(R.id.nav_carrito).isVisible = true
     }
 
     fun cerrarSesion() {
@@ -91,6 +99,13 @@ class MainActivity : AppCompatActivity() {
             configurarMenu()
             // Actualizamos el nav header a usuario no registrado porque se cerró sesión
             actualizarNavHeader(null, null)
+
+            // Se reinicia el carrito de compras
+            Carrito.reiniciar()
+
+            // Se eliminan shared preferences de la sesión cerrada
+            eliminarRegistroDeSesion()
+
             // Cerramos el menú
             drawerLayout.closeDrawers()
         } catch (e: Exception) {
@@ -98,6 +113,13 @@ class MainActivity : AppCompatActivity() {
             Log.e("ERROR", "Error en cerrarSesion: ${e.message}")
         }
 
+    }
+
+    private fun eliminarRegistroDeSesion() {
+        val sharedPreferences = getSharedPreferences("slapc.prefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.commit()
     }
 
     // Estoes para actualizar el nav header con los datos del usuario que inició sesión

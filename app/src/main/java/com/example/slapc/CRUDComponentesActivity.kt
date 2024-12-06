@@ -2,7 +2,6 @@
 package com.example.slapc
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -12,7 +11,6 @@ import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -91,27 +89,34 @@ class CRUDComponentesActivity : AppCompatActivity() {
             // Si los datos son incompletos, se muestra una advertencia.
             Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show()
         } else {
-            // Creación del nuevo componente
-            val nuevoComponente = Componente(
-                edtNombre.text.toString(),
-                edtImagen.text.toString(),
-                edtPrecio.text.toString().toDouble(),
-                Componente.obtenerCategoriaConNombre(categoriaSeleccionada)!!,
-                edtDetalles.text.toString()
-            )
-            val componenteCoincidiente = RepositorioComponentes.buscarComponente(edtNombre.text.toString())
-
-            if (componenteCoincidiente != null) {
-                // Actualización del componente
-                RepositorioComponentes.actualizarComponente(componenteCoincidiente.id, nuevoComponente)
-                Toast.makeText(this, "Componente '${componenteCoincidiente.nombre}' actualizado", Toast.LENGTH_SHORT).show()
-            } else {
+            val idImagen = resources.getIdentifier(edtImagen.text.toString(), "drawable", packageName)
+            if(idImagen == 0) {
+                Toast.makeText(this, "Referencie una imagen válida", Toast.LENGTH_SHORT).show()
+            }
+            else {
                 // Creación del nuevo componente
-                RepositorioComponentes.agregarComponente(nuevoComponente)
-                Toast.makeText(this, "Componente '${nuevoComponente.nombre}' creado", Toast.LENGTH_SHORT).show()
+                val nuevoComponente = Componente(
+                    edtNombre.text.toString(),
+                    edtImagen.text.toString(),
+                    edtPrecio.text.toString().toDouble(),
+                    Componente.obtenerCategoriaConNombre(categoriaSeleccionada)!!,
+                    edtDetalles.text.toString()
+                )
+                val componenteCoincidiente = RepositorioComponentes.buscarComponente(edtNombre.text.toString())
+
+                if (componenteCoincidiente != null) {
+                    // Actualización del componente
+                    RepositorioComponentes.actualizarComponente(componenteCoincidiente.id, nuevoComponente)
+                    Toast.makeText(this, "Componente '${componenteCoincidiente.nombre}' actualizado", Toast.LENGTH_SHORT).show()
+                } else {
+                    // Creación del nuevo componente
+                    RepositorioComponentes.agregarComponente(nuevoComponente)
+                    Toast.makeText(this, "Componente '${nuevoComponente.nombre}' creado", Toast.LENGTH_SHORT).show()
+                }
+
+                limpiarCampos()
             }
 
-            Log.d("CatalogoFragment", "Producto agregado: $nuevoComponente")
         }
     }
 
@@ -119,9 +124,12 @@ class CRUDComponentesActivity : AppCompatActivity() {
         if (edtNombre.text.isEmpty() || edtNombre.text.isBlank()) {
             Toast.makeText(this, "Ingrese un nombre de componente para buscar", Toast.LENGTH_SHORT).show()
         } else {
-            val componenteEncontrado = RepositorioComponentes.buscarComponente(edtNombre.text.toString())
+            val busqueda = edtNombre.text.toString()
+            val componenteEncontrado = RepositorioComponentes.buscarComponente(busqueda)
 
             if (componenteEncontrado == null) {
+                limpiarCampos()
+                edtNombre.setText(busqueda)
                 Toast.makeText(this, "No se encontró el componente '${edtNombre.text}'", Toast.LENGTH_SHORT).show()
             } else {
                 edtImagen.setText(componenteEncontrado.refImagen)
@@ -137,13 +145,26 @@ class CRUDComponentesActivity : AppCompatActivity() {
         }
     }
 
+    private fun limpiarCampos() {
+        edtNombre.text.clear()
+        edtImagen.text.clear()
+        edtPrecio.text.clear()
+        edtDetalles.text.clear()
+        spnCategoria.setSelection(0)
+        edtNombre.requestFocus()
+    }
+
     private fun borrarComponente() {
         if (edtNombre.text.isEmpty() || edtNombre.text.isBlank()) {
             Toast.makeText(this, "Ingrese un nombre de componente para borrar", Toast.LENGTH_SHORT).show()
         } else {
-            val componenteEncontrado = RepositorioComponentes.buscarComponente(edtNombre.text.toString())
+            val busqueda = edtNombre.text.toString()
+            val componenteEncontrado = RepositorioComponentes.buscarComponente(busqueda)
+
+            limpiarCampos()
 
             if (componenteEncontrado == null) {
+                edtNombre.setText(busqueda)
                 Toast.makeText(this, "No se encontró el componente '${edtNombre.text}' a borrar", Toast.LENGTH_SHORT).show()
             } else {
                 RepositorioComponentes.quitarComponente(componenteEncontrado.id)

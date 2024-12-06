@@ -29,4 +29,8 @@ object RepositorioArmados {
     fun buscarArmadosPorNombre(nombre: String): List<Armado> {
         return catalogoArmados.filter { it.nombre.contains(nombre, ignoreCase = true) }
     }
+
+    fun obtenerArmado(id: Int): Armado? {
+        return catalogoArmados.find({ a -> a.id == id})
+    }
 }
