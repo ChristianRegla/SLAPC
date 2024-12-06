@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- Título -->
     <TextView
         android:id="@+id/text_titulo_mis_pedidos"
         android:layout_width="wrap_content"

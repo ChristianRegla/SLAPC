@@ -57,7 +57,6 @@ class ComponentePedidoAdapter(private val productosPedidos: List<componentePedid
         }
     }
 
-
     private class LoadImageTask(val imageView: ImageView) : AsyncTask<String, Void, Bitmap?>() {
         override fun doInBackground(vararg params: String?): Bitmap? {
             return try {
@@ -74,7 +73,7 @@ class ComponentePedidoAdapter(private val productosPedidos: List<componentePedid
         inner class ProductoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val imgProducto: ImageView = itemView.findViewById(R.id.imgProducto)
             val tvNombre: TextView = itemView.findViewById(R.id.tvNombre)
-            val tvDescripcion: TextView = itemView.findViewById(R.id.tvPrecio)
+            val tvPrecio: TextView = itemView.findViewById(R.id.tvPrecio)
         }
 
         override fun onPostExecute(result: Bitmap?) {
@@ -83,7 +82,6 @@ class ComponentePedidoAdapter(private val productosPedidos: List<componentePedid
             }
         }
     }
-
 
     override fun getItemCount(): Int = productosPedidos.size
 

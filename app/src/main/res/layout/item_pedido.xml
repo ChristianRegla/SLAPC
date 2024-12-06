@@ -16,15 +16,16 @@
         <!-- Número de pedido -->
         <TextView
             android:id="@+id/text_numero_pedido"
-            android:layout_width="147dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
+            android:layout_gravity="center"
+            android:textAlignment="center"
             android:hint="N.0 de Pedido"
-            android:textColor="@color/black"
+            android:textColor="@color/gray"
+            android:textColorHint="@color/gray"
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <!-- Fecha y precio -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,6 +48,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_gravity="center"
                 android:background="@color/colorOnFocus"
                 android:gravity="end"
                 android:hint="Precio"
@@ -54,18 +56,20 @@
                 android:textSize="14sp" />
         </LinearLayout>
 
-        <!-- Botón de detalles -->
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_ver_detalles"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:cornerRadius="32dp"
             android:layout_marginTop="12dp"
             android:text="Ver detalles del pedido"
-            android:backgroundTint="@color/primaryColor"
-            android:textColor="@color/white"
-            android:padding="8dp"
-            android:textSize="14sp"
+            android:backgroundTint="@color/text_secondary"
             android:textStyle="bold"
-            android:layout_marginBottom="4dp" />
+            android:layout_marginBottom="4dp"
+            android:textSize="14sp"
+            android:padding="8dp"
+            android:textColor="@color/white"/>
+
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>

@@ -12,13 +12,15 @@ import com.example.slapc.R
 import com.example.slapc.ui.pedidos.RepositorioPedidos
 import com.example.slapc.ui.catalogo.ProductoAdapter
 import com.example.slapc.RepositorioComponentes
+import com.google.android.material.button.MaterialButton
+import java.util.Locale
 
 class DetallesPedidoActivity : AppCompatActivity() {
 
     private lateinit var recyclerViewProductos: RecyclerView
     private lateinit var textDireccion: TextView
     private lateinit var textTotalPagar: TextView
-    private lateinit var buttonSalir: Button
+    private lateinit var buttonSalir: MaterialButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,8 +45,11 @@ class DetallesPedidoActivity : AppCompatActivity() {
             Log.d("DetallesPedidoActivity", "Componentes cargados: ${componentes.size}")
             recyclerViewProductos.adapter = ComponentePedidoAdapter(componentes)
 
+            //Se deja el total a pagar con dos decimales
+            val resultado = String.format(Locale.US, "%.2f", pedido.total).toDouble()
+
             textDireccion.text = "Entrega en: ${pedido.fechaEntrega} a las ${pedido.horaEntrega}"
-            textTotalPagar.text = "Total a pagar: $${pedido.total}"
+            textTotalPagar.text = "Total a pagar: $${resultado}"
         }
 
         buttonSalir.setOnClickListener {

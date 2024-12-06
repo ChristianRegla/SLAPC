@@ -7,6 +7,8 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.slapc.R
+import com.google.android.material.button.MaterialButton
+import java.util.Locale
 
 class PedidoAdapter(
     private val pedidos: List<Pedido>,
@@ -17,7 +19,7 @@ class PedidoAdapter(
         val numeroPedido: TextView = view.findViewById(R.id.text_numero_pedido)
         val fechaEntrega: TextView = view.findViewById(R.id.text_fecha_entrega)
         val precioTotal: TextView = view.findViewById(R.id.text_precio)
-        val botonDetalles: Button = view.findViewById(R.id.button_ver_detalles)
+        val botonDetalles: MaterialButton = view.findViewById(R.id.button_ver_detalles)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PedidoViewHolder {
@@ -30,7 +32,9 @@ class PedidoAdapter(
         val pedido = pedidos[position]
         holder.numeroPedido.text = "No. de Pedido: ${pedido.id}"
         holder.fechaEntrega.text = "Fecha de Entrega: ${pedido.fechaEntrega} a las ${pedido.horaEntrega}"
-        holder.precioTotal.text = "Total: $${pedido.total}"
+        //Se deja el total a pagar con dos decimales
+        val resultado = String.format(Locale.US, "%.2f", pedido.total).toDouble()
+        holder.precioTotal.text = "Total: $${resultado}"
         holder.botonDetalles.setOnClickListener { onClick(pedido) }
     }
 
