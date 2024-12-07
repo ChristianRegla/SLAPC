@@ -28,9 +28,7 @@ class PedidosFragment : Fragment() {
         // Obtener la lista de pedidos desde el repositorio
         val pedidos = RepositorioPedidos.obtenerPedidos()
 
-        // Configurar el adaptador
         adapter = PedidoAdapter(pedidos) { pedido ->
-            // Acción al hacer clic en "Ver detalles del pedido"
             val intent = Intent(requireContext(), DetallesPedidoActivity::class.java)
             intent.putExtra("pedido_id", pedido.id)
             startActivity(intent)

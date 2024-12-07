@@ -12,9 +12,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.slapc.Pedido
+import com.example.slapc.ui.pedidos.Pedido
 import com.example.slapc.R
-import com.example.slapc.RepositorioPedidos
+import com.example.slapc.ui.pedidos.RepositorioPedidos
 import com.example.slapc.databinding.FragmentCarritoBinding
 import com.example.slapc.ui.carrito.adaptador.ItemEnCarritoAdaptador
 import com.google.android.material.button.MaterialButton
@@ -78,7 +78,7 @@ class CarritoFragment : Fragment() {
 
     private fun comprarCarrito() {
         // Obtener datos preexistentes
-        val nombresItems = Carrito.copiarNombresComponentes()
+        val detallesItems = Carrito.generarDetallesDeItemParaPedido()
         val garantias = Carrito.copiarGarantias()
         val total = Carrito.total
 
@@ -109,7 +109,7 @@ class CarritoFragment : Fragment() {
             fechaCompra,
             fechaEntrega,
             horaEntrega,
-            nombresItems,
+            detallesItems,
             total,
             garantias
         ))
