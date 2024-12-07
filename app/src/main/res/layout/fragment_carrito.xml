@@ -31,7 +31,6 @@
                 android:textSize="18sp"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rclCarritoItems" />
 
@@ -43,7 +42,6 @@
                 android:textSize="18sp"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.502"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txtCarritoSubtotal" />
 
@@ -77,7 +75,7 @@
                 android:layout_width="220dp"
                 android:layout_height="50dp"
                 android:text="@string/realizar_compra"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 app:cornerRadius="32dp"
                 android:drawableLeft="@drawable/ic_buy_action"
                 android:layout_marginBottom="10dp"
