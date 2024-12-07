@@ -43,6 +43,14 @@
                 android:padding="30dp">
 
                 <TextView
+                    android:id="@+id/tvCategoriaDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Categoría"
+                    android:textColor="@color/gray"
+                    android:textSize="15sp" />
+
+                <TextView
                     android:id="@+id/tvNombreDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -50,25 +58,14 @@
                     android:text="Nombre del Producto"
                     android:textColor="@color/white"
                     android:textSize="30sp"
-                    android:padding="8dp"
                     android:textStyle="bold"
                     android:fontFamily="sans-serif-medium"/>
 
                 <TextView
-                    android:id="@+id/tvCategoriaDetail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="Categoría"
-                    android:textColor="@color/gray"
-                    android:textSize="25sp" />
-
-                <TextView
                     android:id="@+id/tvPrecioDetail"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
-                    android:padding="8dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
                     android:text="Precio"
                     android:textColor="@color/text_secondary"
                     android:textStyle="bold"
@@ -77,7 +74,7 @@
                 <TextView
                     android:id="@+id/tvDetallesDetail"
                     android:layout_width="match_parent"
-                    android:layout_height="107dp"
+                    android:layout_height="wrap_content"
                     android:layout_below="@id/imgProductoDetail"
                     android:layout_marginTop="50dp"
                     android:padding="8dp"
