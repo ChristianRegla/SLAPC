@@ -2,7 +2,6 @@ package com.example.slapc.ui.pedidos
 
 import com.example.slapc.CategoriaComponente
 import com.example.slapc.ui.pedidos.componentePedido
-import com.example.slapc.ui.pedidos.RepositorioComponentesPedidos
 
 object RepositorioPedidos {
     private val listaPedidos = mutableListOf<Pedido>()

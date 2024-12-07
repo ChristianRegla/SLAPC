@@ -24,7 +24,6 @@ class ProductoDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_producto_detail)
 
-        // Extraer datos del Intent
         val id = intent.getIntExtra("id", 0)
         val nombre = intent.getStringExtra("nombre")
         val reflimagen = intent.getStringExtra("reflimagen")
@@ -33,7 +32,6 @@ class ProductoDetailActivity : AppCompatActivity() {
         val detallesTecnicos = intent.getStringExtra("detallesTecnicos")
         val fabAddToCart: FloatingActionButton = findViewById(R.id.fabAddToCart)
 
-        // Log para verificar los datos recibidos
         Log.d(
             "ProductoDetailActivity",
             "ID: $id, Nombre: $nombre, Imagen: $reflimagen, Precio: $precio, Categoría: $categoria, Detalles: $detallesTecnicos"
@@ -46,7 +44,6 @@ class ProductoDetailActivity : AppCompatActivity() {
         val tvCategoria: TextView = findViewById(R.id.tvCategoriaDetail)
         val tvDetalles: TextView = findViewById(R.id.tvDetallesDetail)
 
-        // Configurar vista con datos
         if (reflimagen != null) {
             if (reflimagen.startsWith("http://") || reflimagen.startsWith("https://")) {
                 // Cargar imagen desde URL
@@ -58,11 +55,11 @@ class ProductoDetailActivity : AppCompatActivity() {
                     imgProducto.setImageResource(resId)
                 } else {
                     Log.e("ProductoDetailActivity", "Referencia de imagen no válida: $reflimagen")
-                    imgProducto.setImageResource(R.drawable.full_logo) // Imagen predeterminada
+                    imgProducto.setImageResource(R.drawable.full_logo)
                 }
             }
         } else {
-            imgProducto.setImageResource(R.drawable.full_logo) // Imagen predeterminada
+            imgProducto.setImageResource(R.drawable.full_logo)
         }
 
         tvNombre.text = nombre ?: "Nombre no disponible"
@@ -100,7 +97,6 @@ class ProductoDetailActivity : AppCompatActivity() {
                 null
             }
         }
-
         override fun onPostExecute(result: Bitmap?) {
             if (result != null) {
                 imageView.setImageBitmap(result)
