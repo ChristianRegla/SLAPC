@@ -31,7 +31,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/spinner_background"
-        android:drawableRight="@android:drawable/btn_dropdown"
+        android:drawableEnd="@android:drawable/btn_dropdown"
         android:paddingEnd="0dp"
         android:spinnerMode="dropdown" />
 
@@ -40,10 +40,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/spinnerCategorias"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:padding="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
         android:textAlignment="textEnd"
         tools:listitem="@layout/item_producto" />
 
