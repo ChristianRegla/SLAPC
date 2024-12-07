@@ -31,21 +31,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            app:cardCornerRadius="28dp"
-            android:layout_marginBottom="-20dp"
             app:cardBackgroundColor="@color/background_dark"
             android:id="@+id/cardView">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="30dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tvCategoriaDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginTop="30dp"
                     android:text="Categoría"
                     android:textColor="@color/gray"
                     android:textSize="15sp" />
@@ -54,6 +54,9 @@
                     android:id="@+id/tvNombreDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="16dp"
                     android:text="Nombre del Producto"
                     android:textColor="@color/white"
@@ -62,27 +65,30 @@
                     android:fontFamily="sans-serif-medium"/>
 
                 <TextView
-                    android:id="@+id/tvPrecioDetail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="Precio"
-                    android:textColor="@color/text_secondary"
-                    android:textStyle="bold"
-                    android:textSize="30sp" />
-
-                <TextView
                     android:id="@+id/tvDetallesDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginTop="10dp"
                     android:layout_below="@id/imgProductoDetail"
-                    android:layout_marginTop="50dp"
-                    android:padding="8dp"
-                    android:background="@color/background_dark_variant"
                     android:text="Detalles técnicos"
                     android:textSize="20sp"
                     android:textColor="@color/gray"
                     android:fontFamily="sans-serif-medium"/>
+
+                <TextView
+                    android:id="@+id/tvPrecioDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="75dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="Precio"
+                    android:textColor="@color/text_secondary"
+                    android:textStyle="bold"
+                    android:textSize="30sp" />
 
             </LinearLayout>
 
