@@ -1,6 +1,7 @@
-package com.example.slapc
+package com.example.slapc.ui.pedidos
+import com.example.slapc.CategoriaComponente
 
-class Componente(
+class componentePedido(
     var nombre: String,
     var refImagen: String,
     var precio: Double,

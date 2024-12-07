@@ -41,7 +41,8 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.nav_login,
                 R.id.nav_catalogo,
-                R.id.nav_carrito
+                R.id.nav_carrito,
+                R.id.nav_pedido
             ),
             drawerLayout
         )
@@ -75,6 +76,7 @@ class MainActivity : AppCompatActivity() {
         val menu = navView.menu
         menu.findItem(R.id.nav_cerrar_sesion).isVisible = false
         menu.findItem(R.id.nav_admin_menu).isVisible = false
+        menu.findItem(R.id.nav_pedido).isVisible = false
         menu.findItem(R.id.nav_carrito).isVisible = false
         menu.findItem(R.id.nav_login).isVisible = true
     }
@@ -86,6 +88,7 @@ class MainActivity : AppCompatActivity() {
         menu.findItem(R.id.nav_login).isVisible = false
         menu.findItem(R.id.nav_cerrar_sesion).isVisible = true
         menu.findItem(R.id.nav_admin_menu).isVisible = false
+        menu.findItem(R.id.nav_pedido).isVisible = true
         menu.findItem(R.id.nav_carrito).isVisible = true
     }
 

@@ -3,70 +3,63 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    app:cardCornerRadius="18dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
 
-        <ImageView
-            android:id="@+id/imgItmCarImagen"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            tools:srcCompat="@tools:sample/avatars" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="4dp">
+
+            <ImageView
+                android:id="@+id/imgItmCarImagen"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                tools:srcCompat="@tools:sample/avatars"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:id="@+id/txtItmCarSubtotal"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/subtotal"
+                android:textAlignment="center"
+                android:textColor="@color/text_secondary"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="5dp">
 
             <TextView
                 android:id="@+id/txtItmCarNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/nombre"
-                android:textSize="24sp"
+                android:textColor="@color/white"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txtItmCarCantidad"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/cantidad"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/txtItmCarSubtotal"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/subtotal"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-                <ImageButton
-                    android:id="@+id/ibtnItmCarEditarCantidad"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/baseline_edit_24" />
-
-            </LinearLayout>
 
             <ToggleButton
                 android:id="@+id/tgbItmCarGarantia"
@@ -75,16 +68,30 @@
                 android:textOff="@string/garantia_desactivada"
                 android:textOn="@string/garantia_activada" />
 
-            <Space
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="16dp" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtItmCarCantidad"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/cantidad"
+                    android:textSize="16sp" />
+
+                <ImageButton
+                    android:id="@+id/ibtnItmCarEditarCantidad"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_edit_pencil" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
-        <Space
-            android:layout_width="20dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"

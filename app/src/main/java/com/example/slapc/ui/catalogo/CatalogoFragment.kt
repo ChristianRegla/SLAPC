@@ -46,16 +46,6 @@ class CatalogoFragment : Fragment() {
 
         // Se obtiene la lista más reciente de componentes directo del repositorio.
         productos = RepositorioComponentes.obtenerComponentes()
-        // El repositorio ya hace la función de modelo de datos, por lo que usar un ViewModel que
-        // guardara registros duplicados resultaba innecesario, además su uso principal no cuadraba en esta interacción;
-        // los viewModel se usan más bien con ventanas que tienen datos que cambian dinámicamente acorde
-        // a interacciones de la misma ventana, pero el view model que se quitó respondía a interacciones
-        // de la ventana del CRUD; finalmente el observer estaba siempre asignando una lista vacía,
-        // por lo que era una prueba más de cómo el usar view model en este caso estaba perjudicando
-        // más que aportando a la interacción que se deseaba.
-        //
-        // Para el caso de los filtros por categoría, la funcionalidad que ya se vió que está debajo debería funcionar
-        // correctamente sin necesitar un view model que pudiera reintroducir problemas.
 
         adapter = ProductoAdapter(productos, activityWithResultLauncher) // Usa la lista inicializada vacía
         recyclerView.layoutManager = GridLayoutManager(context, 2)

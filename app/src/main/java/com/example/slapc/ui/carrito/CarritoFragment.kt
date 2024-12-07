@@ -17,6 +17,7 @@ import com.example.slapc.R
 import com.example.slapc.RepositorioPedidos
 import com.example.slapc.databinding.FragmentCarritoBinding
 import com.example.slapc.ui.carrito.adaptador.ItemEnCarritoAdaptador
+import com.google.android.material.button.MaterialButton
 import java.util.Calendar
 
 class CarritoFragment : Fragment() {
@@ -31,7 +32,7 @@ class CarritoFragment : Fragment() {
     private lateinit var txtGarantias: TextView
     private lateinit var txtIVA: TextView
     private lateinit var txtTotal: TextView
-    private lateinit var btnComprar: Button
+    private lateinit var btnComprar: MaterialButton
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,7 +47,7 @@ class CarritoFragment : Fragment() {
         txtGarantias = binding.txtCarritoGarantias
         txtIVA = binding.txtCarritoIVA
         txtTotal = binding.txtCarritoTotal
-        btnComprar = binding.btnCarritoComprar
+        btnComprar = binding.btnCarritoComprar as MaterialButton
 
         // Muestra inicial de items de carrito.
         val recyclerView = binding.rclCarritoItems

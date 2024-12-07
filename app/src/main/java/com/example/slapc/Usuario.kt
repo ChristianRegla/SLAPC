@@ -5,6 +5,7 @@ data class Usuario(
     val correo: String,
     val contraseña: String,
     val direccionEntrega: String,
-    val horarioEntrega: String,
+    val horaInicio: String,
+    val horaFin: String,
     val esAdmin: Boolean
 )

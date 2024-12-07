@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_login">
+    app:startDestination="@+id/nav_catalogo">
 
     <fragment
         android:id="@+id/nav_login"
@@ -11,25 +11,26 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_login"
         app:route="login"/>
-
     <fragment
         android:id="@+id/nav_registro"
         android:name="com.example.slapc.RegisterFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_register" />
-
     <fragment
         android:id="@+id/nav_admin_menu"
         android:name="com.example.slapc.AdminMenuFragment"
         android:label="@string/menu_admin"
         tools:layout="@layout/fragment_admin_menu" />
-
     <fragment
         android:id="@+id/nav_catalogo"
         android:name="com.example.slapc.ui.catalogo.CatalogoFragment"
         android:label="@string/catalogo_prin"
         tools:layout="@layout/fragment_catalogo" />
-        
+    <fragment
+        android:id="@+id/nav_pedido"
+        android:name="com.example.slapc.ui.pedidos.PedidosFragment"
+        android:label="@string/pedidos_prin"
+        tools:layout="@layout/fragment_catalogo" />
     <fragment
         android:id="@+id/nav_carrito"
         android:name="com.example.slapc.ui.carrito.CarritoFragment"
