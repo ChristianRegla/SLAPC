@@ -41,7 +41,8 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.nav_login,
                 R.id.nav_catalogo,
-                R.id.nav_carrito
+                R.id.nav_carrito,
+                R.id.nav_pedido
             ),
             drawerLayout
         )
