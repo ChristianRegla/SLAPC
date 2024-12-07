@@ -37,5 +37,10 @@
         android:name="com.example.slapc.ui.carrito.CarritoFragment"
         android:label="@string/menu_carrito"
         tools:layout="@layout/fragment_carrito" />
+    <fragment
+        android:id="@+id/nav_catalogo_armados"
+        android:name="com.example.slapc.CatalogoArmadosFragment"
+        android:label="@string/catalogo_armados_prin"
+        tools:layout="@layout/fragment_catalogo_armados" />
 
 </navigation>
