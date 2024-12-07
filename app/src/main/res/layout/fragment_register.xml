@@ -44,7 +44,8 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -106,6 +107,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/rango_entrega"
                     android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
                     android:textColor="@color/white" />
 
                 <EditText
@@ -150,6 +152,7 @@
                         app:cornerRadius="32dp"
                         android:textColor="@color/white"
                         app:backgroundTint="@color/text_secondary"/>
+
                 </LinearLayout>
 
             </LinearLayout>
