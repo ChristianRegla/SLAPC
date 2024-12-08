@@ -17,6 +17,11 @@
             android:title="@string/catalogo_prin" />
 
         <item
+            android:id="@+id/nav_catalogo_armados"
+            android:icon="@drawable/baseline_shopping_cart_24"
+            android:title="@string/catalogo_armados_prin" />
+
+        <item
             android:id="@+id/nav_carrito"
             android:icon="@drawable/baseline_shopping_cart_24"
             android:title="@string/menu_carrito" />

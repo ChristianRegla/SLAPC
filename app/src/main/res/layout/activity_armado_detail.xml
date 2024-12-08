@@ -1,0 +1,120 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/background_light">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_dark"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:elevation="20dp"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tvNombreArmadoDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre del Armado"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvCategoriaArmadoDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Categoría"
+            android:textSize="16sp"
+            android:textColor="@color/colorOnFocus"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:id="@+id/tvDescripcionArmadoDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descripcion"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:layout_marginBottom="4dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/seccionComponentes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="115dp"
+        android:background="@color/background_light"
+        android:elevation="4dp"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="453dp"
+            android:padding="1dp"
+            android:textAlignment="textEnd"
+            tools:listitem="@layout/item_componente_armado" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/seccionPrecios"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/background_dark"
+        android:elevation="4dp">
+
+        <TextView
+            android:id="@+id/tvPrecioArmadoDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Precio normal: $00.00"
+            android:textSize="16sp"
+            android:textColor="@color/gray"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:id="@+id/tvDescuentoArmadoDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descuento: 20%"
+            android:textSize="14sp"
+            android:textColor="@color/gray"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:id="@+id/tvPrecioFinalDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Precio con descuento: $00.00"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddToCartArmado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        app:backgroundTint="@color/text_secondary"
+        app:srcCompat="@drawable/carrito"
+        android:contentDescription="@string/agregar_al_carrito"/>
+</RelativeLayout>

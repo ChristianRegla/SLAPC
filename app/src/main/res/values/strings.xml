@@ -99,8 +99,12 @@
 
 
     <string name="catalogo_prin">Catálogo de productos</string>
+    <string name="catalogo_armados_prin">Catálogo de armados</string>
     <string name="pedidos_prin">Mis Pedidos</string>
     <string name="agregar_al_carrito"></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="about_us_description">La aplicación móvil para SLAPC tiene como objetivo principal mejorar la experiencia de compra y selección de componentes de cómputo, proporcionando un entorno eficiente y moderno para los clientes. Con módulos dedicados como la exploración de productos, armados sugeridos y gestión de pedidos, esta solución está diseñada para abordar problemas actuales de la empresa, como la comodidad del cliente al realizar compras en línea.</string>
 
 </resources>
