@@ -42,7 +42,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_login,
                 R.id.nav_catalogo,
                 R.id.nav_carrito,
-                R.id.nav_pedido
+                R.id.nav_pedido,
+                R.id.nav_about_us
             ),
             drawerLayout
         )

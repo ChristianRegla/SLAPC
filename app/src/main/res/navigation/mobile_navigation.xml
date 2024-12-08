@@ -31,11 +31,15 @@
         android:name="com.example.slapc.ui.pedidos.PedidosFragment"
         android:label="@string/pedidos_prin"
         tools:layout="@layout/fragment_pedidos" />
-        
     <fragment
         android:id="@+id/nav_carrito"
         android:name="com.example.slapc.ui.carrito.CarritoFragment"
         android:label="@string/menu_carrito"
         tools:layout="@layout/fragment_carrito" />
+    <fragment
+        android:id="@+id/nav_about_us"
+        android:name="com.example.slapc.AboutUsFragment"
+        android:label="About Us"
+        tools:layout="@layout/fragment_about_us" />
 
 </navigation>
