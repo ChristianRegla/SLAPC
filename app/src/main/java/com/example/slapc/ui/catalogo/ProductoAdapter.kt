@@ -17,6 +17,7 @@ import com.example.slapc.R
 import com.example.slapc.ui.detalles.ProductoDetailActivity
 import java.net.HttpURLConnection
 import java.net.URL
+import java.util.Locale
 
 class ProductoAdapter( private val productos: List<Componente>,
                        private val activityWithResultLauncher: ActivityResultLauncher<Intent>
