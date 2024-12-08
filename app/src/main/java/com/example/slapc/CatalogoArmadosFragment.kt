@@ -18,11 +18,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.slapc.databinding.FragmentCatalogoBinding
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CatalogoArmadosFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CatalogoArmadosFragment : Fragment() {
 
     private lateinit var armados: List<Armado>
@@ -61,7 +56,8 @@ class CatalogoArmadosFragment : Fragment() {
         })
 
         spinner = binding.spinnerCategorias
-        val categorias = listOf("Categoria") + CategoriaComponente.values().map { Componente.obtenerNombreDeCategoria(it) }
+        val res = resources
+        val categorias = res.getStringArray(R.array.categories)
         val adapterSpinner = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categorias)
         adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapterSpinner
@@ -79,7 +75,7 @@ class CatalogoArmadosFragment : Fragment() {
     }
 
     private fun filtrarPorCategoria(categoria: String) {
-        val filteredList = if (categoria == "Categoria") {
+        val filteredList = if (categoria == "Categoría del armado") {
             armados
         } else {
             armados.filter { it.categoria == categoria }
