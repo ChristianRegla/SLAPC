@@ -1,5 +1,10 @@
 package com.example.slapc.ui.carrito
 
+import android.icu.util.TimeZone
+import com.example.slapc.ui.pedidos.Pedido
+import com.example.slapc.ui.pedidos.RepositorioPedidos
+import java.util.Calendar
+
 object Carrito {
     private val items = mutableListOf<ItemEnCarrito>()
     var subtotal: Double = 0.0
@@ -11,9 +16,17 @@ object Carrito {
     private var onItemEliminado: (() -> Unit)? = null
     private var onRecalculoDeAcumulados: (() -> Unit)? = null
 
+    fun estaVacio(): Boolean {
+        return items.isEmpty()
+    }
+
     fun agregarItem(item: ItemEnCarrito) {
-        items.add(item)
-        recalcularAcumulados()
+        val itemRepetido = items.any { i -> i.mismaReferenciaA(item) }
+
+        if (!itemRepetido) {
+            items.add(item)
+            recalcularAcumulados()
+        }
     }
 
     fun obtenerItems(): List<ItemEnCarrito> {
@@ -53,14 +66,62 @@ object Carrito {
         onRecalculoDeAcumulados = null
     }
 
-    fun copiarNombresComponentes(): List<String> {
-        val nombres = items.map { item -> item.obtenerNombre() }
+    fun generarDetallesDeItemParaPedido(): List<String> {
+        val nombres = items.map { item -> "${item.obtenerNombre()} x ${item.cantidad}" }
         return nombres
     }
 
     fun copiarGarantias(): List<String> {
         val copiaGarantias = garantias.map { g -> g }
         return copiaGarantias
+    }
+
+    fun comprar() {
+        // Obtener datos preexistentes
+        val detallesItems = generarDetallesDeItemParaPedido()
+        val garantias = copiarGarantias()
+        val total = Carrito.total
+
+        // Obtener datos de tiempo actuales
+        val calendario = android.icu.util.Calendar.getInstance(TimeZone.getTimeZone("GMT-06:00"))
+        val dia = dosCifrasDe(calendario.get(Calendar.DAY_OF_MONTH))
+        val mes = dosCifrasDe(calendario.get(Calendar.MONTH) + 1)
+        val anio = calendario.get(Calendar.YEAR)
+
+        // Obtener datos de tiempo de entrega
+        calendario.add(Calendar.DATE, 5)
+        val diaEntrega = dosCifrasDe(calendario.get(Calendar.DAY_OF_MONTH))
+        val mesEntrega = dosCifrasDe(calendario.get(Calendar.MONTH) + 1)
+        val anioEntrega = dosCifrasDe(calendario.get(Calendar.YEAR))
+        val horas = dosCifrasDe(calendario.get(Calendar.HOUR_OF_DAY))
+        val minutos = dosCifrasDe(calendario.get(Calendar.MINUTE))
+        val segundos = dosCifrasDe(calendario.get(Calendar.SECOND))
+
+        // Crear strings informativas
+        val identificador = "$anio$mes$dia$horas$minutos$segundos"
+        val fechaCompra = "$dia/$mes/$anio"
+        val horaEntrega = "$horas:$minutos"
+        val fechaEntrega = "$diaEntrega/$mesEntrega/$anioEntrega"
+
+        // Crear pedido
+        RepositorioPedidos.agregarPedido(
+            Pedido(
+                identificador,
+                fechaCompra,
+                fechaEntrega,
+                horaEntrega,
+                detallesItems,
+                total,
+                garantias
+            )
+        )
+
+        // Vaciar listado del carrito
+        reiniciar()
+    }
+
+    private fun dosCifrasDe(numero: Int): String {
+        return String.format("%02d", numero)
     }
 
     fun reiniciar() {
